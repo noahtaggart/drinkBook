@@ -4,10 +4,13 @@ import './index.css';
 import { Drinks } from './components/Drinks';
 
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter>
     <Drinks />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

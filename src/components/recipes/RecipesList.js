@@ -3,7 +3,7 @@ import Settings from "../repositories/Settings"
 import { RecipeCard } from "./RecipeCard"
 
 //exports list of ALL recipes
-export const RecipeList = () => {
+export const RecipeList = (props) => {
     const [recipes, setRecipes] = useState([])
 
     useEffect(
