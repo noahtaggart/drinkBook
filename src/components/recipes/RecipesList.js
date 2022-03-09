@@ -15,15 +15,28 @@ export const RecipeList = () => {
             })
         },[]
     )
+    
 
     return (
-        <>
+        <ul>
         {recipes.map(
             (recipe) => {
-                return RecipeCard(recipe)
+                return <RecipeCard key={`recipe--${recipe.id}`} recipeObject={recipe} />
             }
         )}
-        </>
+        </ul>
     )
 
 }
+
+// const recipeCards = recipes.map(
+//     (recipe) => {
+//         return RecipeCard(recipe)
+//     }
+// )
+
+// return (
+//     <>
+//     {recipeCards}
+//     </>
+// )

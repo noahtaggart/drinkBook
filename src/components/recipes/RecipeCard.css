@@ -20,3 +20,12 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+ul, li {
+    list-style-type: none;
+    margin-left: none;
+}
+img {
+    max-width: 10em;
+    height: auto;
+}
