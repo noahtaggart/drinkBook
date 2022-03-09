@@ -7,6 +7,7 @@ export const RecipeCard = ({ recipeObject }) => {
     const [photos, setPhotos] = useState({ recipePhotos: [{ photoUrl: "" }] })
     const [recipeIngredients, setAmount] = useState([])
     const { recipeId } = useParams()
+    
 
     useEffect(
         () => {
