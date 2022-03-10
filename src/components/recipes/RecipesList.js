@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
 import Settings from "../repositories/Settings"
 import { RecipeCard } from "./RecipeCard"
 
@@ -20,9 +21,11 @@ export const RecipeList = (props) => {
     return (
         <ul>
         {recipes.map(
-            (recipe) => {
-                return <RecipeCard key={`recipe--${recipe.id}`} recipeObject={recipe} />
-            }
+            (recipe) => 
+                
+                    <RecipeCard key={`recipe--${recipe.id}`} recipeParam={recipe}/>
+                
+            
         )}
         </ul>
     )
