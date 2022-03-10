@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
 import Settings from "../repositories/Settings"
 import { RecipeCard } from "./RecipeCard"
 
 //exports list of ALL recipes
 export const RecipeList = (props) => {
     const [recipes, setRecipes] = useState([])
-
+    //fetches all recipes
     useEffect(
         () => {
             fetch(`${Settings.remoteURL}/recipes`)
@@ -17,7 +16,7 @@ export const RecipeList = (props) => {
         },[]
     )
     
-
+        //iterates through all recipes and runs them through the RecipeCard function
     return (
         <ul>
         {recipes.map(
@@ -31,15 +30,3 @@ export const RecipeList = (props) => {
     )
 
 }
-
-// const recipeCards = recipes.map(
-//     (recipe) => {
-//         return RecipeCard(recipe)
-//     }
-// )
-
-// return (
-//     <>
-//     {recipeCards}
-//     </>
-// )

@@ -25,7 +25,6 @@ export const Drinks = () => {
                     }
                 }}
             />
-
             <Route path="/login">
                 <Login />
             </Route>
