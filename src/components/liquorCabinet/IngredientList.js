@@ -36,8 +36,8 @@ export const IngredientList = (props) => {
             <IngredientDisplay key={`ingredient--${ingredient.id}`} ingredientParam={ingredient}/>
             )}
         </ul>
-        <IngredientInput />
-            </>
+        <IngredientInput/>
+        </>
     )
 
 }
