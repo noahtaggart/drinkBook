@@ -11,7 +11,7 @@ export const IngredientDisplay = ({ingredientParam}) => {
     const [ingredient, setIngredient] = useState({id:0, name:""})
 
 
-    
+    //in single view page, sets ingredientId match as ingredient
     useEffect(() => {
         if(ingredientId) {
 
@@ -28,6 +28,8 @@ export const IngredientDisplay = ({ingredientParam}) => {
         }
     },[ingredientId])
 
+
+//in list view page, sets the current ingredientParam as ingredient
     useEffect(() => {
         if (ingredientParam){
             fetch(`${Settings.remoteURL}/ingredients`)
@@ -54,15 +56,3 @@ export const IngredientDisplay = ({ingredientParam}) => {
     )
 }
 
-
-
-// //if ingredientId exists (single ingredient view), fetches the object with that Id. Sets to ingredient
-// useEffect(() => {
-//     if (ingredientId) {
-//         fetch(`${Settings.remoteURL}/users/${currentUser()}/?_embed=currentInventory`)
-//         .then(res => res.json())
-//         .then((data) => {
-//             setUser(data)
-//         })
-//     }
-// },[])
