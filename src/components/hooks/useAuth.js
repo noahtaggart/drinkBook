@@ -43,8 +43,13 @@ const useAuth = () => {
         sessionStorage.removeItem("drink_token")
     }
 
+    const currentUser = () => {
+        const user = parseInt(localStorage.getItem("drink_token"))
+        return user
+    }
 
-    return { isAuthenticated, logout, login, register }
+
+    return { isAuthenticated, logout, login, register, currentUser }
 }
 
 export default useAuth

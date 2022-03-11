@@ -39,13 +39,15 @@ export const RecipeCard = ({recipeParam}) => {
     //fetches recipeIngredients with expanded ingredients. matches to current recipeObject. Sets to recipeIngredients
     useEffect(
         () => {
-            fetch(`${Settings.remoteURL}/recipeIngredients?_expand=ingredient`)
+            if("id" in recipeObject){
+
+                fetch(`${Settings.remoteURL}/recipeIngredients?recipeId=${recipeObject.id}&_expand=ingredient`)
                 .then(res => res.json())
                 .then((data) => {
-                    const matchedRecipeIngredients = data.filter(recipeIngredient => recipeIngredient.recipeId === recipeObject.id)
-                    setAmount(matchedRecipeIngredients)
+                    setAmount(data)
                 })
-        }, []
+            }
+        }, [recipeObject]
     )
 
 
@@ -59,7 +61,7 @@ export const RecipeCard = ({recipeParam}) => {
                 <img src={recipeObject.recipePhotos[0].photoUrl} alt={recipeObject.name} />
                 {recipeIngredients.map(
                     (recipeIngredient) => {
-                        return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}</div>
+                        return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
                     })}
                 <br></br>
                 <div className="directions">{recipeObject.description}</div>
