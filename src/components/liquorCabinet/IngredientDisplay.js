@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom"
 import Settings from "../repositories/Settings"
 
 
-export const IngredientDisplay = ({ ingredientParam }) => {
+export const IngredientDisplay = ({ ingredientParam, fetchUser }) => {
     //sets params as ingredientId
     const { ingredientId } = useParams()
     //sets ingredients
@@ -62,7 +62,7 @@ export const IngredientDisplay = ({ ingredientParam }) => {
         //delete that object
         fetch(`${Settings.remoteURL}/currentInventory/${currentItem.id}`, {
             method: "DELETE"
-        })
+        }).then(fetchUser)
 
     }
 

@@ -11,6 +11,10 @@ export const NavBar = (props) => {
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/liquorcabinet">Your Liquor Cabinet</Link>
             </li>
+            <li className="navbar__item active">
+                <Link className="navbar__link" to="/newrecipe">Add New Recipe</Link>
+            </li>
+            
             
             <Link className="navbar__link" to="#"
                 onClick={

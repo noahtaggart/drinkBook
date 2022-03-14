@@ -6,6 +6,7 @@ import Login from "./auth/Login"
 import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Register } from "./auth/Register"
+import image from "../components/logo.png"
 
 export const Drinks = () => {
     return (
@@ -15,7 +16,7 @@ export const Drinks = () => {
                     if (localStorage.getItem("drink_token")) {
                         return (
                             <>
-                                <img src="drinkbook\src\components\logo.png" alt="drinkbook logo"/>
+                                <img src={image} alt="drinkbook logo"/>
                                 <NavBar />
                                 <ApplicationViews />
                             </>
