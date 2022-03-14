@@ -23,7 +23,7 @@ export const IngredientList = (props) => {
             })
             
 
-        },[]
+        },[user]
     )
     
         //iterates through all ingredients and runs them through the ingredientCard function
