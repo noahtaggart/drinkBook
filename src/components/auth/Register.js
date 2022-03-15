@@ -26,7 +26,7 @@ export const Register = () => {
         // base64 encodes the userObject and saves to localSotrage as the kennel_token
         // is this the desired functionality? shouldn't only logging in set the kennel_token?
         register(newUser).then(() => {
-            history.push("/")
+            history.push("/liquorcabinet")
         })
     }
 

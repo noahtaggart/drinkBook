@@ -2,6 +2,7 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { IngredientDisplay } from "./liquorCabinet/IngredientDisplay"
 import { IngredientList } from "./liquorCabinet/IngredientList"
+import { NewIngredient } from "./liquorCabinet/NewIngredient"
 import { EditRecipe } from "./recipes/EditRecipe"
 import { NewRecipe } from "./recipes/NewRecipe"
 import { RecipeCard } from "./recipes/RecipeCard"
@@ -27,6 +28,9 @@ export const ApplicationViews = () => {
                 </Route>
             <Route exact path="/newrecipe">
                 <NewRecipe/>
+            </Route>
+            <Route exact path="/newingredient">
+                <NewIngredient/>
             </Route>
             
         </>

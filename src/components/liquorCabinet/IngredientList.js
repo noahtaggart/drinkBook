@@ -33,7 +33,7 @@ export const IngredientList = (props) => {
         <>
         <ul>
         
-        {user.currentInventory?.map(
+        {user?.currentInventory?.map(
             (ingredient) => 
             <IngredientDisplay key={`ingredient--${ingredient.id}`} ingredientParam={ingredient} fetchUser={fetchUser}/>
             )}

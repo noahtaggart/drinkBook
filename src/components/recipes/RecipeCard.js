@@ -57,7 +57,7 @@ export const RecipeCard = ({ recipeParam }) => {
                         setAmount(data)
                     })
             }
-        }, [recipeObject, ingredientRefresh]
+        }, [recipeObject]
     )
 
     const SinglePageRender = () => {
@@ -102,7 +102,7 @@ export const RecipeCard = ({ recipeParam }) => {
     }
 
     const ListPageRender = () => {
-        if (recipeParam) {
+        if (recipeParam && localStorage.getItem("drink_token")) {
             return <>
                 <li className="card recipe--list">
                     <div className="card-body">
@@ -124,7 +124,32 @@ export const RecipeCard = ({ recipeParam }) => {
                     </div>
                 </li>
             </>
+        } else if (localStorage.getItem("drink_token") === undefined) {
+            return <>
+                <li className="card recipe--list">
+                    <div className="card-body">
+                        <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
+                        </h3>
+                        {recipeObject.recipePhotos.length >= 1 ?
+
+                            <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
+                            : ""
+                        }
+
+
+                        {recipeIngredients.map(
+                            (recipeIngredient) => {
+                                return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}</div>
+                            })}
+                        <br></br>
+                        <div className="directions">{recipeObject.description}</div>
+                    </div>
+                </li>
+            </>
+
         }
+
+        
     }
 
 

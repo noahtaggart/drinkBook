@@ -5,7 +5,23 @@ import Settings from "../repositories/Settings";
 import { NewRecipeIngredient } from "./NewRecipeIngredient";
 
 
+
 //edit recipe { id: , name: , userId: , description:""}
+
+//What I want it to do:
+//1. show existing recipe card
+//2. edit button that allows change to title, saves to recipe stateobject
+//3. edit button that allows change to description, saves to recipe stateobject
+//4A. Add Ingredient form, saves to statearray
+//5. Edit button on each ingredient, edits ingredients in statearray, button sends to api
+//4. Delete button on each ingredient, removes from api
+
+
+
+
+
+
+
 
 export const EditRecipe = () => {
     const { recipeId } = useParams()
@@ -13,7 +29,6 @@ export const EditRecipe = () => {
     const [editRecipe, update] = useState({
     })
     const history = useHistory()
-    const [ingredientRefresh, updateIngredients] = useState(false)
 
 
     useEffect(() => {
@@ -81,10 +96,10 @@ export const EditRecipe = () => {
                     placeholder={editRecipe.description}/>
                     </div>
                 </fieldset>
-                <button className="btn btn-primary" onClick={submitEditedRecipe}>Finish Editing</button>
+                <button className="btn btn-primary" onClick={submitEditedRecipe}>Save Changes</button>
             </form>
             <br></br>
-            <NewRecipeIngredient currentRecipeId={recipeId} ingredientRefresh={ingredientRefresh} updateIngredients={updateIngredients} />
+                    <NewRecipeIngredient currentRecipeId={recipeId}/>
         </>
     )
 }
