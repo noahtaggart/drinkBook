@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import Settings from "../repositories/Settings"
-import { NewRecipeIngredient } from "./NewRecipeIngredient"
 import "./RecipeCard.css"
 
 export const RecipeCard = ({ recipeParam }) => {
@@ -12,7 +11,7 @@ export const RecipeCard = ({ recipeParam }) => {
     //sets state for the current recipeObject
     const [recipeObject, setRecipe] = useState({ recipePhotos: [{ photoUrl: "" }] })
 
-    const [ingredientRefresh, update] = useState(false)
+    
 
 
 
@@ -58,13 +57,30 @@ export const RecipeCard = ({ recipeParam }) => {
                         setAmount(data)
                     })
             }
-        },[recipeObject, ingredientRefresh ]
+        }, [recipeObject, ingredientRefresh]
     )
 
     const SinglePageRender = () => {
         if (recipeId) {
             return <>
-            <li className="card recipe--single">
+                {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId ?
+                    <li className="card recipe--single">
+                        <div className="card-body"><Link to={`/recipes/${recipeObject.id}/edit`}>Edit Recipe</Link>
+                            <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
+                            </h3>
+                            {recipeObject.recipePhotos.length >= 1 ?
+                                <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
+                                : ""
+                            }
+                            {recipeIngredients.map(
+                                (recipeIngredient) => {
+                                    return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
+                                })}
+                            <br></br>
+                            <div className="directions">{recipeObject.description}</div>
+                        </div>
+                    </li>
+                    :<li className="card recipe--single">
                     <div className="card-body">
                         <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
                         </h3>
@@ -79,10 +95,8 @@ export const RecipeCard = ({ recipeParam }) => {
                         <br></br>
                         <div className="directions">{recipeObject.description}</div>
                     </div>
-                    {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId? 
-                    <NewRecipeIngredient ingredientRefresh={ingredientRefresh} updateIngredients={update} currentRecipeId={recipeObject.id}/>:""
-                    }
                 </li>
+                }
             </>
         }
     }
@@ -90,7 +104,7 @@ export const RecipeCard = ({ recipeParam }) => {
     const ListPageRender = () => {
         if (recipeParam) {
             return <>
-            <li className="card recipe--list">
+                <li className="card recipe--list">
                     <div className="card-body">
                         <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
                         </h3>
@@ -117,9 +131,12 @@ export const RecipeCard = ({ recipeParam }) => {
 
     return (
         <>
-        {SinglePageRender()}
-        {ListPageRender()}
+            {SinglePageRender()}
+            {ListPageRender()}
         </>
 
     )
 } 
+
+
+//create edit option
