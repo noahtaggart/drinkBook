@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 //new ingredient {id: , recipeId: , ingredientId: , ingredientAmount}
 
 
-export const NewRecipeIngredient = ({ currentRecipeId }) => {
+export const NewRecipeIngredient = ({ currentRecipeId, ingredientRefresh, updateIngredients }) => {
     //all ingredients
     const [ingredientList, updateList] = useState([])
     //creates new ingredient object in state
@@ -51,7 +51,7 @@ export const NewRecipeIngredient = ({ currentRecipeId }) => {
             }
             return fetch(`${Settings.remoteURL}/recipeIngredients`, fetchOption)
                 .then(() => {
-                    
+                    updateIngredients(!ingredientRefresh)
                     history.push(`/recipes/${currentRecipeId}`)
                 })
 

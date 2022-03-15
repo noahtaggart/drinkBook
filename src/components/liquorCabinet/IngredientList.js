@@ -12,6 +12,7 @@ export const IngredientList = (props) => {
     const [user, setUser] = useState({})
 
     
+    //fetches user with embedded inventory
     const fetchUser = () => {
         fetch(`${Settings.remoteURL}/users/?_embed=currentInventory`)
         .then(res => res.json())
@@ -21,14 +22,10 @@ export const IngredientList = (props) => {
         })}
             
             
-            //fetches user with embedded inventory
             useEffect(
                 () => {
                        fetchUser()
-                    
-                    
-        
-                },[]
+                    },[]
             )
     
         //iterates through all ingredients and runs them through the ingredientCard function

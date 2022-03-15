@@ -12,6 +12,14 @@ export const RecipeCard = ({ recipeParam }) => {
     //sets state for the current recipeObject
     const [recipeObject, setRecipe] = useState({ recipePhotos: [{ photoUrl: "" }] })
 
+    const [ingredientRefresh, update] = useState(false)
+
+
+
+
+
+
+
     //if recipeId exists (single recipe view), fetches the object with that Id. Sets to recipeObject
     useEffect(() => {
         if (recipeId) {
@@ -38,6 +46,7 @@ export const RecipeCard = ({ recipeParam }) => {
         }, [recipeParam]
     )
 
+
     //fetches recipeIngredients with expanded ingredients. matches to current recipeObject. Sets to recipeIngredients
     useEffect(
         () => {
@@ -49,10 +58,10 @@ export const RecipeCard = ({ recipeParam }) => {
                         setAmount(data)
                     })
             }
-        }, [recipeObject]
+        },[recipeObject, ingredientRefresh ]
     )
 
-    const singlePageRender = () => {
+    const SinglePageRender = () => {
         if (recipeId) {
             return <>
             <li className="card recipe--single">
@@ -71,14 +80,14 @@ export const RecipeCard = ({ recipeParam }) => {
                         <div className="directions">{recipeObject.description}</div>
                     </div>
                     {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId? 
-                    <NewRecipeIngredient currentRecipeId={recipeObject.id}/>:""
+                    <NewRecipeIngredient ingredientRefresh={ingredientRefresh} updateIngredients={update} currentRecipeId={recipeObject.id}/>:""
                     }
                 </li>
             </>
         }
     }
 
-    const listPageRender = () => {
+    const ListPageRender = () => {
         if (recipeParam) {
             return <>
             <li className="card recipe--list">
@@ -108,8 +117,8 @@ export const RecipeCard = ({ recipeParam }) => {
 
     return (
         <>
-        {singlePageRender()}
-        {listPageRender()}
+        {SinglePageRender()}
+        {ListPageRender()}
         </>
 
     )
