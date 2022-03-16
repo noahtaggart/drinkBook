@@ -93,7 +93,7 @@ export const EditRecipe = () => {
                         copy.description = e.target.value
                         update(copy)
                     }}
-                   value={editRecipe.description}/>
+                    value={editRecipe.description}/>
                     </div>
                 </fieldset>
                 <button className="btn btn-primary" onClick={submitEditedRecipe}>Save Changes</button>
