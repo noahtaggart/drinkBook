@@ -21,7 +21,7 @@ img {
   }
   
   /* On mouse-over, add a deeper shadow */
-  .card:hover {
+.card :hover {
     animation: jiggle 0.2s;
     transition: .4s all ease;
     z-index: 11;

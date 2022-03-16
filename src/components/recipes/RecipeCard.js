@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useHistory } from "react-router-dom"
 import Settings from "../repositories/Settings"
 import "./RecipeCard.css"
 
@@ -10,14 +10,49 @@ export const RecipeCard = ({ recipeParam }) => {
     const { recipeId } = useParams()
     //sets state for the current recipeObject
     const [recipeObject, setRecipe] = useState({ recipePhotos: [{ photoUrl: "" }] })
+    const [editable, setEditable] = useState(false)
+    //creates new recipe object in state
+    const [editRecipe, update] = useState({
+    })
+    const history = useHistory()
 
-    
+    //function that posts the edit object to the recipes in the API
+    const submitEditedRecipe = (evt) => {
+        evt.preventDefault()
+        const editObject = {
+            name: editRecipe.name,
+            userId: editRecipe.userId,
+            description: editRecipe.description
+        }
+
+        const fetchOption = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(editObject)
+        }
+        return fetch(`${Settings.remoteURL}/recipes/${recipeId}`, fetchOption)
+            .then(() => {
+                setEditable(false)
+            })
+            .then(() => {
+                history.push(`/recipes/${recipeObject.id}`)
+                
+
+    })
+}
 
 
 
-
-
-
+    useEffect(() => {
+        const defaultRecipe = {
+            name: recipeObject.name,
+            userId: recipeObject.userId,
+            description: recipeObject.description
+        }
+        update(defaultRecipe)
+    }, [recipeObject])
 
     //if recipeId exists (single recipe view), fetches the object with that Id. Sets to recipeObject
     useEffect(() => {
@@ -28,7 +63,7 @@ export const RecipeCard = ({ recipeParam }) => {
                     setRecipe(data)
                 })
         }
-    }, [recipeId]
+    }, [recipeId, editable]
     )
 
     //if recipeParam exists (list view), fetches the object with that Id. Sets to recipeObject
@@ -62,42 +97,77 @@ export const RecipeCard = ({ recipeParam }) => {
 
     const SinglePageRender = () => {
         if (recipeId) {
-            return <>
-                {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId ?
+            if (editable === false) {
+
+                return <>
+                    {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId ?
+                        <li className="card recipe--single">
+                            <div className="card-body"><button onClick={() => setEditable(true)}>Edit Recipe</button>
+                                <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
+                                </h3>
+                                {recipeObject.recipePhotos.length >= 1 ?
+                                    <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
+                                    : ""
+                                }
+                                {recipeIngredients.map(
+                                    (recipeIngredient) => {
+                                        return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
+                                    })}
+                                <br></br>
+                                <div className="directions">{recipeObject.description}</div>
+                            </div>
+                        </li>
+                        : <li className="card recipe--single">
+                            <div className="card-body">
+                                <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
+                                </h3>
+                                {recipeObject.recipePhotos.length >= 1 ?
+                                    <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
+                                    : ""
+                                }
+                                {recipeIngredients.map(
+                                    (recipeIngredient) => {
+                                        return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
+                                    })}
+                                <br></br>
+                                <div className="directions">{recipeObject.description}</div>
+                            </div>
+                        </li>
+                    }
+                </>
+            } else {
+                return (
                     <li className="card recipe--single">
-                        <div className="card-body"><Link to={`/recipes/${recipeObject.id}/edit`}>Edit Recipe</Link>
-                            <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
-                            </h3>
+                        <div className="card-body">
+                            <input type="text" defaultValue={recipeObject.name} key={`recipeName--${recipeObject.id}`} className="card-title" onChange={e => {
+                                const copy = { ...editRecipe }
+                                copy.name = e.target.value
+                                update(copy)
+                            }} /><br></br>
+
                             {recipeObject.recipePhotos.length >= 1 ?
                                 <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
                                 : ""
                             }
                             {recipeIngredients.map(
                                 (recipeIngredient) => {
-                                    return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
+                                    return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}</div>
                                 })}
                             <br></br>
-                            <div className="directions">{recipeObject.description}</div>
+                            <textarea onChange={e => {
+                                const copy = { ...editRecipe }
+                                copy.description = e.target.value
+                                update(copy)
+                            }} className="directions" defaultValue={recipeObject.description} />
+                            <button className="btn btn-primary" onClick={submitEditedRecipe}>Save Changes</button>
                         </div>
                     </li>
-                    :<li className="card recipe--single">
-                    <div className="card-body">
-                        <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
-                        </h3>
-                        {recipeObject.recipePhotos.length >= 1 ?
-                            <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
-                            : ""
-                        }
-                        {recipeIngredients.map(
-                            (recipeIngredient) => {
-                                return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
-                            })}
-                        <br></br>
-                        <div className="directions">{recipeObject.description}</div>
-                    </div>
-                </li>
-                }
-            </>
+                    //put recipe
+                    //put recipe ingredients
+                    //look into text area
+                    //change editable back to false
+                )
+            }
         }
     }
 
@@ -149,7 +219,7 @@ export const RecipeCard = ({ recipeParam }) => {
 
         }
 
-        
+
     }
 
 
@@ -161,7 +231,7 @@ export const RecipeCard = ({ recipeParam }) => {
         </>
 
     )
-} 
+}
 
 
 //create edit option
