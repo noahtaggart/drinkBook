@@ -57,13 +57,13 @@ export const NewIngredient = () => {
                         }
                     }
                     placeholder="Ingredient name..."/><br></br>
-                    <label htmlFor="ingredientDescription">Directions:</label><br></br>
+                    <label htmlFor="ingredientDescription">Description:</label><br></br>
                     <input type="text" required autoFocus className="ingredientDescription" onChange={e => {
                         const copy = {...newIngredient}
                         copy.description = e.target.value
                         update(copy)
                     }}
-                    placeholder="Ingredient directions..."/><br></br>
+                    placeholder="Ingredient description..."/><br></br>
                     <label htmlFor="ingredientPhoto">Picture URL:</label><br></br>
                     <input type="text" required autoFocus className="ingredientPhoto" onChange={e => {
                         const copy = {...newIngredient}
