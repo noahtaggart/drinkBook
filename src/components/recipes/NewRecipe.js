@@ -33,7 +33,6 @@ export const NewRecipe = () => {
             return fetch(`${Settings.remoteURL}/recipes`, fetchOption)
             .then((data) => data.json())
             .then((data) => {
-                debugger
                 //redirect to new recipe Objects page. how to get that id?
                 history.push(`recipes/${data.id}`)
             })

@@ -30,7 +30,7 @@ const useAuth = () => {
             .then(_ => _.json())
             .then(matchingUsers => {
                 if (matchingUsers.length > 0) {
-                    localStorage.setItem("drink_token", matchingUsers.id)
+                    localStorage.setItem("drink_token", matchingUsers[0].id)
                     return true
                 }
                 return false

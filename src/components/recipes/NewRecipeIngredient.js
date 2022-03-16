@@ -61,10 +61,9 @@ export const NewRecipeIngredient = ({ currentRecipeId, ingredientRefresh, update
     return (
         <>
             <form className="ingredientInventoryForm">
-                <h4 className="ingredientInventoryForm_name">New Ingredient</h4>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="ingredient">Ingredient:</label>
+                        <label htmlFor="ingredient">Add New Ingredient?</label><br></br>
                         <select className="ingredient" required defaultValue={0} onChange={
                             (evt) => {
                                 const copy = { ...newIngredient }
@@ -77,7 +76,7 @@ export const NewRecipeIngredient = ({ currentRecipeId, ingredientRefresh, update
                                 return <option key={`ingredient--${ingredient.id}`} value={ingredient.id}>{ingredient.name}</option>
 
                             })}
-                        </select>
+                        </select><br></br>
                         <label htmlFor="ingredientAmount">How much?</label><br></br>
                         <input type="text" required autoFocus className="ingredient"
                             onChange={e => {

@@ -22,10 +22,14 @@ export const Drinks = () => {
                             </>
                         );
                     } else {
-                        return <Redirect to="/login" />;
+                        return <Redirect to="/home" />;
                     }
                 }}
             />
+            <Route exact path="/home">
+                <NavBar/>
+            <RecipeList/>
+            </Route>
             <Route path="/login">
                 <Login />
             </Route>

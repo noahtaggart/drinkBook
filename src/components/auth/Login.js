@@ -40,7 +40,7 @@ const Login = () => {
             .then(success => {
                 if (success) {
                     console.log("*** Rerouting to root URL ***")
-                    history.push("/")
+                    history.push("/liquorcabinet")
                 }
             })
     }
