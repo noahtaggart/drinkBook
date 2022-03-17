@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link, useParams, useHistory } from "react-router-dom"
 import Settings from "../repositories/Settings"
 import "./RecipeCard.css"
+import image from "../seo-social-web-network-internet_189_icon-icons.com_61521.png"
 
 export const RecipeCard = ({ recipeParam }) => {
     //imports all recipe ingredients and filters them by current recipe
@@ -20,6 +21,8 @@ export const RecipeCard = ({ recipeParam }) => {
     const [ingredientReload, setIngredientReload] = useState(false)
 
     const [editableIngredients, setEditIng] = useState(false)
+
+    const [addIngredientSwitch, updateIngredientSwitch] = useState(false)
 
     //all ingredients
     const [ingredients, setIngredients] = useState([])
@@ -53,6 +56,11 @@ export const RecipeCard = ({ recipeParam }) => {
         return fetch(`${Settings.remoteURL}/recipes/${recipeId}`, fetchOption)
     }
 
+    const doneEditing = () => {
+        updateIngredientSwitch(false)
+        setEditIng(false)
+    }
+
     
     const removeIngredientRecipe = (ingredientId) => {
         const currentItem = recipeIngredients.find(item => item.ingredientId === ingredientId)
@@ -78,15 +86,18 @@ export const RecipeCard = ({ recipeParam }) => {
             
         }
         
-
-            const fetchOption = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(newObject)
-            }
-            return fetch(`${Settings.remoteURL}/recipeIngredients`, fetchOption)
+        
+        const fetchOption = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newObject)
+        }
+        return fetch(`${Settings.remoteURL}/recipeIngredients`, fetchOption)
+        .then(updateNewIng({}))
+            .then(setIngredientReload(true))
+            .then(updateIngredientSwitch(false))
 
         }
     }
@@ -160,7 +171,7 @@ export const RecipeCard = ({ recipeParam }) => {
                     {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId ?
                         <li className="card recipe--single">
                             <div className="card-body"><button onClick={() => setEditable(true)}>Edit Recipe</button>
-                                <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
+                                <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
                                 </h3>
                                 {recipeObject.recipePhotos.length >= 1 ?
                                     <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
@@ -223,13 +234,18 @@ export const RecipeCard = ({ recipeParam }) => {
                                                 (recipeIngredient) => {
                                                     return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}> {recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}
                                                         <button onClick={() => {
-                                                            removeIngredientRecipe(recipeIngredient.id)
+                                                            removeIngredientRecipe(recipeIngredient.ingredientId)
                                                         }}>🗑️</button>
                                                     </div>
 
 
                                                 })
                                         }
+                                        {addIngredientSwitch === false ?
+                                        <>
+                                        <button onClick={() => updateIngredientSwitch(true)}><img className="add--image" src={image} alt="add ingredient button"/></button> <button onClick={() => doneEditing()}>Done Changing Ingredients</button>
+                                        </>
+                                        : <>
                                         <label htmlFor="ingredientAmount">How much?</label>
                                         <input type="text" autoFocus className="ingredientAmount" onChange={e => {
                                             const copy = { ...newIngredient }
@@ -244,12 +260,14 @@ export const RecipeCard = ({ recipeParam }) => {
                                             <option value="0" disabled hidden>Choose an ingredient...</option>
                                             {ingredients.map(ingredient => {
                                                 return <option key={`ingredient--${ingredient.id}`} value={ingredient.id}>{ingredient.name}</option>
-
+                                                
                                             })}
                                         </select>
                                         <button className="btn btn-primary" onClick={()=>submitIngredient()}>Add ingredient</button>
                                         <br></br>
-                                        <button onClick={() => setEditIng(false)}>Done Changing Ingredients</button>
+                                        <button onClick={() => doneEditing()}>Done Changing Ingredients</button>
+                                            </>
+                                    }
                                     </>
 
 
@@ -263,7 +281,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                 copy.description = e.target.value
                                 update(copy)
                             }} className="directions" defaultValue={recipeObject.description} /> <br></br>
-                            <button className="btn btn-primary" onClick={() => submitEditedRecipe}>Save Changes</button>
+                            <button className="btn btn-primary" onClick={submitEditedRecipe}>Save Changes</button>
                         </div>
                     </li >
                     //put recipe

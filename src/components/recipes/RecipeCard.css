@@ -27,3 +27,13 @@ img {
     z-index: 11;
     box-shadow: 5px 15px 20px rgba(72, 62, 23, 0.4)
   }
+
+.add--image {
+    max-width: 1em;
+}
+
+textarea {
+    width:98%;
+    min-height: 6em;
+    max-height: auto;
+}
