@@ -86,14 +86,14 @@ export const EditRecipe = () => {
                             update(copy)
                         }
                     }
-                    placeholder={editRecipe.name}/><br></br>
+                    value={editRecipe.name}/><br></br>
                     <label htmlFor="recipeDescription">Directions:</label><br></br>
                     <input type="text" required autoFocus className="recipeDescription" onChange={e => {
                         const copy = {...editRecipe}
                         copy.description = e.target.value
                         update(copy)
                     }}
-                    placeholder={editRecipe.description}/>
+                    value={editRecipe.description}/>
                     </div>
                 </fieldset>
                 <button className="btn btn-primary" onClick={submitEditedRecipe}>Save Changes</button>

@@ -21,9 +21,19 @@ img {
   }
   
   /* On mouse-over, add a deeper shadow */
-  .card:hover {
+.card :hover {
     animation: jiggle 0.2s;
     transition: .4s all ease;
     z-index: 11;
     box-shadow: 5px 15px 20px rgba(72, 62, 23, 0.4)
   }
+
+.add--image {
+    max-width: 1em;
+}
+
+textarea {
+    width:98%;
+    min-height: 6em;
+    max-height: auto;
+}
