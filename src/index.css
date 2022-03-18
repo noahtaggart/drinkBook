@@ -60,3 +60,23 @@ dialog {
       opacity: 1;
   }
 }
+body{
+  background-color: #CFC2AC;
+}
+button {
+  background-color: #467AB1;
+  
+}
+a.a--button {
+  color: #FFFFFF;
+}
+
+ul {
+  list-style-type: none;
+  margin-left: none;
+  display: flex;
+}
+li {
+  list-style-type: none;
+  margin-left: none;
+}

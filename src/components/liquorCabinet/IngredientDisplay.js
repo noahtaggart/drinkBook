@@ -1,7 +1,9 @@
-import "./IngredientCard.css"
+// import "./IngredientCard.css"
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import Settings from "../repositories/Settings"
+import remove from "./remove.png"
+
 
 
 export const IngredientDisplay = ({ ingredientParam, fetchUser }) => {
@@ -72,13 +74,14 @@ export const IngredientDisplay = ({ ingredientParam, fetchUser }) => {
 
     return (
         <>
+
             {ingredientParam ?
                 <li className="card ingredient--list">
                     <div className="card-body">
                         <h3 key={`ingredientName--${ingredient.id}`} className="card-title"><Link to={`/liquorcabinet/${ingredient.id}`}>{ingredient.name}</Link></h3>
-                        <button onClick={() => {
+                        <button className="remove--button" onClick={() => {
                             removeItemInventory(ingredient.id)
-                        }}>🗑️</button>
+                        }}><img className="remove--image" src={remove} alt="remove ingredient"/></button>
                     </div>
                 </li>
                 : ""}
@@ -91,6 +94,7 @@ export const IngredientDisplay = ({ ingredientParam, fetchUser }) => {
                     </div>
                 </li>
                 : ""}
+
         </>
     )
 }

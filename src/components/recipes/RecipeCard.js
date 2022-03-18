@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Link, useParams, useHistory } from "react-router-dom"
 import Settings from "../repositories/Settings"
 import "./RecipeCard.css"
-import image from "../seo-social-web-network-internet_189_icon-icons.com_61521.png"
+import image from "./add.png"
+import remove from "./remove.png"
 
 export const RecipeCard = ({ recipeParam }) => {
     //imports all recipe ingredients and filters them by current recipe
@@ -170,7 +171,7 @@ export const RecipeCard = ({ recipeParam }) => {
                 return <>
                     {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId ?
                         <li className="card recipe--single">
-                            <div className="card-body"><button onClick={() => setEditable(true)}>Edit Recipe</button>
+                            <div className="card-body"><button onClick={() => setEditable(true)}><a className="a--button">Edit Recipe</a></button>
                                 <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
                                 </h3>
                                 {recipeObject.recipePhotos.length >= 1 ?
@@ -225,7 +226,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                                 return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}> {recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}
                                                 </div>
                                             })}
-                                        <button onClick={() => setEditIng(true)}>Change Ingredients?</button>
+                                        <button onClick={() => setEditIng(true)}><a className="a--button">Change Ingredients?</a></button>
                                     </>
                                     : //edit ingredients
                                     <>
@@ -233,9 +234,9 @@ export const RecipeCard = ({ recipeParam }) => {
                                             recipeIngredients.map(
                                                 (recipeIngredient) => {
                                                     return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}> {recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}
-                                                        <button onClick={() => {
+                                                        <button className="remove--button" onClick={() => {
                                                             removeIngredientRecipe(recipeIngredient.ingredientId)
-                                                        }}>🗑️</button>
+                                                        }}><img className="remove--image" src={remove} alt="remove ingredient" /></button>
                                                     </div>
 
 
@@ -243,7 +244,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                         }
                                         {addIngredientSwitch === false ?
                                         <>
-                                        <button onClick={() => updateIngredientSwitch(true)}><img className="add--image" src={image} alt="add ingredient button"/></button> <button onClick={() => doneEditing()}>Done Changing Ingredients</button>
+                                        <button className="add--button" onClick={() => updateIngredientSwitch(true)}><img className="add--image" src={image} alt="add ingredient button"/></button> <button onClick={() => doneEditing()}><a className="a--button">Done Changing Ingredients</a></button>
                                         </>
                                         : <>
                                         <label htmlFor="ingredientAmount">How much?</label>
@@ -263,9 +264,9 @@ export const RecipeCard = ({ recipeParam }) => {
                                                 
                                             })}
                                         </select>
-                                        <button className="btn btn-primary" onClick={()=>submitIngredient()}>Add ingredient</button>
+                                        <button className="btn btn-primary" onClick={()=>submitIngredient()}><a className="a--button">Add ingredient</a></button>
                                         <br></br>
-                                        <button onClick={() => doneEditing()}>Done Changing Ingredients</button>
+                                        <button onClick={() => doneEditing()}><a className="a--button">Done Changing Ingredients</a></button>
                                             </>
                                     }
                                     </>
@@ -281,7 +282,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                 copy.description = e.target.value
                                 update(copy)
                             }} className="directions" defaultValue={recipeObject.description} /> <br></br>
-                            <button className="btn btn-primary" onClick={submitEditedRecipe}>Save Changes</button>
+                            <button className="btn btn-primary" onClick={submitEditedRecipe}><a className="a--button">Save Changes</a></button>
                         </div>
                     </li >
                     //put recipe
@@ -298,7 +299,7 @@ export const RecipeCard = ({ recipeParam }) => {
     const ListPageRender = () => {
         if (recipeParam && localStorage.getItem("drink_token")) {
             return <>
-                <li className="card recipe--list">
+                <li className="card">
                     <div className="card-body">
                         <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
                         </h3>
@@ -320,7 +321,7 @@ export const RecipeCard = ({ recipeParam }) => {
             </>
         } else if (localStorage.getItem("drink_token") === undefined) {
             return <>
-                <li className="card recipe--list">
+                <li className="card">
                     <div className="card-body">
                         <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
                         </h3>
@@ -350,8 +351,10 @@ export const RecipeCard = ({ recipeParam }) => {
 
     return (
         <>
+        {/* <div className={styles}> */}
             {SinglePageRender()}
             {ListPageRender()}
+        {/* </div> */}
         </>
 
     )

@@ -87,8 +87,8 @@ const Login = () => {
                         <label htmlFor="remember"> Remember Me </label>
                     </fieldset>
                     <fieldset>
-                        <button type="submit">
-                            Sign in
+                        <button type="submit"><a className="a--button">
+                            Sign in</a>
                     </button>
                     </fieldset>
                 </form>

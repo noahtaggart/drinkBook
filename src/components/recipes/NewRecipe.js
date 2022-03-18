@@ -65,7 +65,7 @@ export const NewRecipe = () => {
                     placeholder="Recipe directions..."/>
                     </div>
                 </fieldset>
-                <button className="btn btn-primary" onClick={submitRecipe}>Add Recipe</button>
+                <button className="btn btn-primary" onClick={submitRecipe}><a className="a--button">Add Recipe</a></button>
             </form>
         </>
     )
