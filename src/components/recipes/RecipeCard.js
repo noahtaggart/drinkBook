@@ -170,7 +170,9 @@ export const RecipeCard = ({ recipeParam }) => {
 
                 return <>
                     {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId ?
-                        <li className="card recipe--single">
+                     <section className="single--container">
+
+                        <div className="recipe--single">
                             <div className="card-body"><button onClick={() => setEditable(true)}><a className="a--button">Edit Recipe</a></button>
                                 <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
                                 </h3>
@@ -185,8 +187,12 @@ export const RecipeCard = ({ recipeParam }) => {
                                 <br></br>
                                 <div className="directions">{recipeObject.description}</div>
                             </div>
-                        </li>
-                        : <li className="card recipe--single">
+                        </div>
+                        
+                            </section> 
+                        :
+                        <section className="single--container">
+                            <div className="recipe--single">
                             <div className="card-body">
                                 <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
                                 </h3>
@@ -201,13 +207,16 @@ export const RecipeCard = ({ recipeParam }) => {
                                 <br></br>
                                 <div className="directions">{recipeObject.description}</div>
                             </div>
-                        </li>
-                    }
+                        </div>
+                    </section>
+            }
                 </>
             } else {
                 //screen for editable recipe
                 return (
-                    <li className="card recipe--single">
+                    <section className="single--container">
+                    
+                    <div className="recipe--single">
                         <div className="card-body">
                             <input type="text" defaultValue={recipeObject.name} key={`recipeName--${recipeObject.id}`} className="card-title" onChange={e => {
                                 const copy = { ...editRecipe }
@@ -240,8 +249,8 @@ export const RecipeCard = ({ recipeParam }) => {
                                                     </div>
 
 
-                                                })
-                                        }
+})
+}
                                         {addIngredientSwitch === false ?
                                         <>
                                         <button className="add--button" onClick={() => updateIngredientSwitch(true)}><img className="add--image" src={image} alt="add ingredient button"/></button> <button onClick={() => doneEditing()}><a className="a--button">Done Changing Ingredients</a></button>
@@ -272,7 +281,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                     </>
 
 
-                                }
+}
 
 
                             </div>
@@ -284,7 +293,8 @@ export const RecipeCard = ({ recipeParam }) => {
                             }} className="directions" defaultValue={recipeObject.description} /> <br></br>
                             <button className="btn btn-primary" onClick={submitEditedRecipe}><a className="a--button">Save Changes</a></button>
                         </div>
-                    </li >
+                    </div >
+                            </section>
                     //put recipe
                     //put recipe ingredients
 

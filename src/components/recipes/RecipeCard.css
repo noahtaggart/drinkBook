@@ -29,6 +29,20 @@ img {
     width:32%
     
   }
+.recipe--single {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color: #F0F0EE;
+    padding: 2em 2em;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    width: 75%;
+
+}
+.single--container {
+    display: flex;
+    justify-content: center;
+}
 
   h3.card-title {
       margin:0em 0em 1em 0em
