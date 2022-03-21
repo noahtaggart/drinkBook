@@ -7,7 +7,7 @@ export const NavBar = (props) => {
 const [currentUser, update] = useState({})
 
 useEffect(() => {
-    fetch(`${Settings.remoteURL}/users/${localStorage.getItem("drink_token")}`)
+    fetch(`${Settings.remoteURL}/users/${parseInt(localStorage.getItem("drink_token"))}`)
     .then(res => res.json())
     .then((data) => {
         update(data)
@@ -23,6 +23,9 @@ useEffect(() => {
             <ul className="navbar">
                 <li className="navbar__item active">
                     <Link className="navbar__link" to="/recipes">Recipes</Link>
+                </li>
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to="/autorecipes">Auto Recipes</Link>
                 </li>
                 <li className="navbar__item active">
                     <Link className="navbar__link" to="/liquorcabinet">Your Liquor Cabinet</Link>

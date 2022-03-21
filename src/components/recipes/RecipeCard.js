@@ -62,7 +62,7 @@ export const RecipeCard = ({ recipeParam }) => {
         setEditIng(false)
     }
 
-    
+
     const removeIngredientRecipe = (ingredientId) => {
         const currentItem = recipeIngredients.find(item => item.ingredientId === ingredientId)
         fetch(`${Settings.remoteURL}/recipeIngredients/${currentItem.id}`, {
@@ -72,33 +72,33 @@ export const RecipeCard = ({ recipeParam }) => {
 
     }
 
-     //function that posts the new object to the recipeIngredients in the API
-     const submitIngredient = () => {
-        
+    //function that posts the new object to the recipeIngredients in the API
+    const submitIngredient = () => {
+
 
         if (newIngredient.ingredientId >= 1 && newIngredient.ingredientAmount) {
 
-        
-        
-        const newObject = {
-            recipeId: recipeObject.id,
-            ingredientId: newIngredient.ingredientId,
-            ingredientAmount: newIngredient.ingredientAmount
-            
-        }
-        
-        
-        const fetchOption = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newObject)
-        }
-        return fetch(`${Settings.remoteURL}/recipeIngredients`, fetchOption)
-        .then(updateNewIng({}))
-            .then(setIngredientReload(true))
-            .then(updateIngredientSwitch(false))
+
+
+            const newObject = {
+                recipeId: parseInt(recipeObject.id),
+                ingredientId: newIngredient.ingredientId,
+                ingredientAmount: newIngredient.ingredientAmount
+
+            }
+
+
+            const fetchOption = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newObject)
+            }
+            return fetch(`${Settings.remoteURL}/recipeIngredients`, fetchOption)
+                .then(updateNewIng({}))
+                .then(setIngredientReload(true))
+                .then(updateIngredientSwitch(false))
 
         }
     }
@@ -170,131 +170,131 @@ export const RecipeCard = ({ recipeParam }) => {
 
                 return <>
                     {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId ?
-                     <section className="single--container">
+                        <section className="single--container">
 
-                        <div className="recipe--single">
-                            <div className="card-body"><button onClick={() => setEditable(true)}><a className="a--button">Edit Recipe</a></button>
-                                <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
-                                </h3>
-                                {recipeObject.recipePhotos.length >= 1 ?
-                                    <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
-                                    : ""
-                                }
-                                {recipeIngredients.map(
-                                    (recipeIngredient) => {
-                                        return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
-                                    })}
-                                <br></br>
-                                <div className="directions">{recipeObject.description}</div>
+                            <div className="recipe--single">
+                                <div className="card-body"><button onClick={() => setEditable(true)}><a className="a--button">Edit Recipe</a></button>
+                                    <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
+                                    </h3>
+                                    {recipeObject.recipePhotos.length >= 1 ?
+                                        <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
+                                        : ""
+                                    }
+                                    {recipeIngredients.map(
+                                        (recipeIngredient) => {
+                                            return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
+                                        })}
+                                    <br></br>
+                                    <div className="directions">{recipeObject.description}</div>
+                                </div>
                             </div>
-                        </div>
-                        
-                            </section> 
+
+                        </section>
                         :
                         <section className="single--container">
                             <div className="recipe--single">
-                            <div className="card-body">
-                                <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
-                                </h3>
-                                {recipeObject.recipePhotos.length >= 1 ?
-                                    <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
-                                    : ""
-                                }
-                                {recipeIngredients.map(
-                                    (recipeIngredient) => {
-                                        return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
-                                    })}
-                                <br></br>
-                                <div className="directions">{recipeObject.description}</div>
+                                <div className="card-body">
+                                    <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
+                                    </h3>
+                                    {recipeObject.recipePhotos.length >= 1 ?
+                                        <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
+                                        : ""
+                                    }
+                                    {recipeIngredients.map(
+                                        (recipeIngredient) => {
+                                            return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
+                                        })}
+                                    <br></br>
+                                    <div className="directions">{recipeObject.description}</div>
+                                </div>
                             </div>
-                        </div>
-                    </section>
-            }
+                        </section>
+                    }
                 </>
             } else {
                 //screen for editable recipe
                 return (
                     <section className="single--container">
-                    
-                    <div className="recipe--single">
-                        <div className="card-body">
-                            <input type="text" defaultValue={recipeObject.name} key={`recipeName--${recipeObject.id}`} className="card-title" onChange={e => {
-                                const copy = { ...editRecipe }
-                                copy.name = e.target.value
-                                update(copy)
-                            }} /><br></br>
-                            {recipeObject.recipePhotos.length >= 1 ?
-                                <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
-                                : ""
-                            }
-                            <div>
-                                {editableIngredients === false ?
-                                    <>
-                                        {recipeIngredients.map(
-                                            (recipeIngredient) => {
-                                                return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}> {recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}
-                                                </div>
-                                            })}
-                                        <button onClick={() => setEditIng(true)}><a className="a--button">Change Ingredients?</a></button>
-                                    </>
-                                    : //edit ingredients
-                                    <>
-                                        {
-                                            recipeIngredients.map(
+
+                        <div className="recipe--single">
+                            <div className="card-body">
+                                <input type="text" defaultValue={recipeObject.name} key={`recipeName--${recipeObject.id}`} className="card-title" onChange={e => {
+                                    const copy = { ...editRecipe }
+                                    copy.name = e.target.value
+                                    update(copy)
+                                }} /><br></br>
+                                {recipeObject.recipePhotos.length >= 1 ?
+                                    <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
+                                    : ""
+                                }
+                                <div>
+                                    {editableIngredients === false ?
+                                        <>
+                                            {recipeIngredients.map(
                                                 (recipeIngredient) => {
                                                     return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}> {recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}
-                                                        <button className="remove--button" onClick={() => {
-                                                            removeIngredientRecipe(recipeIngredient.ingredientId)
-                                                        }}><img className="remove--image" src={remove} alt="remove ingredient" /></button>
                                                     </div>
-
-
-})
-}
-                                        {addIngredientSwitch === false ?
-                                        <>
-                                        <button className="add--button" onClick={() => updateIngredientSwitch(true)}><img className="add--image" src={image} alt="add ingredient button"/></button> <button onClick={() => doneEditing()}><a className="a--button">Done Changing Ingredients</a></button>
+                                                })}
+                                            <button onClick={() => setEditIng(true)}><a className="a--button">Change Ingredients?</a></button>
                                         </>
-                                        : <>
-                                        <label htmlFor="ingredientAmount">How much?</label>
-                                        <input type="text" autoFocus className="ingredientAmount" onChange={e => {
-                                            const copy = { ...newIngredient }
-                                            copy.ingredientAmount = e.target.value
-                                            updateNewIng(copy)
-                                        }} />
-                                        <select className="ingredient" required defaultValue={0} onChange={(evt) => {
-                                            const copy = { ...newIngredient }
-                                            copy.ingredientId = parseInt(evt.currentTarget.value)
-                                            updateNewIng(copy)
-                                        }}>
-                                            <option value="0" disabled hidden>Choose an ingredient...</option>
-                                            {ingredients.map(ingredient => {
-                                                return <option key={`ingredient--${ingredient.id}`} value={ingredient.id}>{ingredient.name}</option>
-                                                
-                                            })}
-                                        </select>
-                                        <button className="btn btn-primary" onClick={()=>submitIngredient()}><a className="a--button">Add ingredient</a></button>
-                                        <br></br>
-                                        <button onClick={() => doneEditing()}><a className="a--button">Done Changing Ingredients</a></button>
-                                            </>
+                                        : //edit ingredients
+                                        <>
+                                            {
+                                                recipeIngredients.map(
+                                                    (recipeIngredient) => {
+                                                        return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}> {recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}
+                                                            <button className="remove--button" onClick={() => {
+                                                                removeIngredientRecipe(recipeIngredient.ingredientId)
+                                                            }}><img className="remove--image" src={remove} alt="remove ingredient" /></button>
+                                                        </div>
+
+
+                                                    })
+                                            }
+                                            {addIngredientSwitch === false ?
+                                                <>
+                                                    <button className="add--button" onClick={() => updateIngredientSwitch(true)}><img className="add--image" src={image} alt="add ingredient button" /></button> <button onClick={() => doneEditing()}><a className="a--button">Done Changing Ingredients</a></button>
+                                                </>
+                                                : <>
+                                                    <label htmlFor="ingredientAmount">How much?</label>
+                                                    <input type="text" autoFocus className="ingredientAmount" onChange={e => {
+                                                        const copy = { ...newIngredient }
+                                                        copy.ingredientAmount = e.target.value
+                                                        updateNewIng(copy)
+                                                    }} />
+                                                    <select className="ingredient" required defaultValue={0} onChange={(evt) => {
+                                                        const copy = { ...newIngredient }
+                                                        copy.ingredientId = parseInt(evt.currentTarget.value)
+                                                        updateNewIng(copy)
+                                                    }}>
+                                                        <option value="0" disabled hidden>Choose an ingredient...</option>
+                                                        {ingredients.map(ingredient => {
+                                                            return <option key={`ingredient--${ingredient.id}`} value={ingredient.id}>{ingredient.name}</option>
+
+                                                        })}
+                                                    </select>
+                                                    <button className="btn btn-primary" onClick={() => submitIngredient()}><a className="a--button">Add ingredient</a></button>
+                                                    <br></br>
+                                                    <button onClick={() => doneEditing()}><a className="a--button">Done Changing Ingredients</a></button>
+                                                </>
+                                            }
+                                        </>
+
+
                                     }
-                                    </>
 
 
-}
-
-
+                                </div>
+                                <br></br>
+                                <textarea onChange={e => {
+                                    const copy = { ...editRecipe }
+                                    copy.description = e.target.value
+                                    update(copy)
+                                }} className="directions" defaultValue={recipeObject.description} /> <br></br>
+                                <button className="btn btn-primary" onClick={submitEditedRecipe}><a className="a--button">Save Changes</a></button>
                             </div>
-                            <br></br>
-                            <textarea onChange={e => {
-                                const copy = { ...editRecipe }
-                                copy.description = e.target.value
-                                update(copy)
-                            }} className="directions" defaultValue={recipeObject.description} /> <br></br>
-                            <button className="btn btn-primary" onClick={submitEditedRecipe}><a className="a--button">Save Changes</a></button>
-                        </div>
-                    </div >
-                            </section>
+                        </div >
+                    </section>
                     //put recipe
                     //put recipe ingredients
 
@@ -361,10 +361,10 @@ export const RecipeCard = ({ recipeParam }) => {
 
     return (
         <>
-        {/* <div className={styles}> */}
+            {/* <div className={styles}> */}
             {SinglePageRender()}
             {ListPageRender()}
-        {/* </div> */}
+            {/* </div> */}
         </>
 
     )
