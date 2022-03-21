@@ -61,7 +61,7 @@ dialog {
   }
 }
 body{
-  background-color: #CFC2AC;
+  background-color: #CFC2AC !important;
 }
 button {
   background-color: #467AB1;

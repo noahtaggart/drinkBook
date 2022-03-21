@@ -4,6 +4,7 @@ import Settings from "../repositories/Settings"
 import "./RecipeCard.css"
 import image from "./add.png"
 import remove from "./remove.png"
+import { Tabs, Tab } from "react-bootstrap"
 
 export const RecipeCard = ({ recipeParam }) => {
     //imports all recipe ingredients and filters them by current recipe
@@ -24,6 +25,7 @@ export const RecipeCard = ({ recipeParam }) => {
     const [editableIngredients, setEditIng] = useState(false)
 
     const [addIngredientSwitch, updateIngredientSwitch] = useState(false)
+
 
     //all ingredients
     const [ingredients, setIngredients] = useState([])
@@ -162,6 +164,7 @@ export const RecipeCard = ({ recipeParam }) => {
                 setIngredients(data)
             })
     }, [])
+
 
     const SinglePageRender = () => {
         if (recipeId) {
@@ -309,26 +312,27 @@ export const RecipeCard = ({ recipeParam }) => {
     const ListPageRender = () => {
         if (recipeParam && localStorage.getItem("drink_token")) {
             return <>
-                <li className="card">
-                    <div className="card-body">
-                        <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
-                        </h3>
-                        {recipeObject.recipePhotos.length >= 1 ?
+                        <li className="card">
+                            <div className="card-body">
+                                <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
+                                </h3>
+                                {recipeObject.recipePhotos.length >= 1 ?
 
-                            <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
-                            : ""
-                        }
+                                    <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
+                                    : ""
+                                }
 
 
-                        {recipeIngredients.map(
-                            (recipeIngredient) => {
-                                return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
-                            })}
-                        <br></br>
-                        <div className="directions">{recipeObject.description}</div>
-                    </div>
-                </li>
+                                {recipeIngredients.map(
+                                    (recipeIngredient) => {
+                                        return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
+                                    })}
+                                <br></br>
+                                <div className="directions">{recipeObject.description}</div>
+                            </div>
+                        </li>
             </>
+            //renders recipe list if not logged in
         } else if (localStorage.getItem("drink_token") === undefined) {
             return <>
                 <li className="card">
@@ -361,10 +365,8 @@ export const RecipeCard = ({ recipeParam }) => {
 
     return (
         <>
-            {/* <div className={styles}> */}
             {SinglePageRender()}
             {ListPageRender()}
-            {/* </div> */}
         </>
 
     )
