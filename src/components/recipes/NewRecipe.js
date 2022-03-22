@@ -33,6 +33,7 @@ export const NewRecipe = () => {
             return fetch(`${Settings.remoteURL}/recipes`, fetchOption)
             .then((data) => data.json())
             .then((data) => {
+                //redirect to new recipe Objects page. how to get that id?
                 history.push(`recipes/${data.id}`)
             })
         }
@@ -56,7 +57,7 @@ export const NewRecipe = () => {
                     }
                     placeholder="Recipe name..."/><br></br>
                     <label htmlFor="recipeDescription">Directions:</label><br></br>
-                    <input type="text" required autoFocus className="recipeDescription" onChange={e => {
+                    <textarea required autoFocus className="recipeDescription" onChange={e => {
                         const copy = {...newRecipe}
                         copy.description = e.target.value
                         update(copy)

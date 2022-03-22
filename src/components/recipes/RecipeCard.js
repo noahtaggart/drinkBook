@@ -4,7 +4,8 @@ import Settings from "../repositories/Settings"
 import "./RecipeCard.css"
 import image from "./add.png"
 import remove from "./remove.png"
-import { Tabs, Tab } from "react-bootstrap"
+import { showUploadWidget } from "./UploadPhotos"
+
 
 export const RecipeCard = ({ recipeParam }) => {
     //imports all recipe ingredients and filters them by current recipe
@@ -230,6 +231,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                     <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
                                     : ""
                                 }
+                                {showUploadWidget()}
                                 <div>
                                     {editableIngredients === false ?
                                         <>
