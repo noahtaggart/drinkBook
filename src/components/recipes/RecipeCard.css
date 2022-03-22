@@ -26,7 +26,7 @@ img {
     padding: 2em 2em;
     margin-bottom: 1em;
     margin-right: 1em;
-    width:32%
+    width:32%;
     
   }
 .recipe--single {
@@ -72,7 +72,7 @@ button.add--button :hover, button.remove--button :hover, button.add--button :foc
 
 
 textarea {
-    width:98%;
+    width:95%;
     min-height: 6em;
     max-height: auto;
 }

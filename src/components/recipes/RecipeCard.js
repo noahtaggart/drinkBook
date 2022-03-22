@@ -231,7 +231,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                     <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
                                     : ""
                                 }
-                                {showUploadWidget()}
+                                
                                 <div>
                                     {editableIngredients === false ?
                                         <>
