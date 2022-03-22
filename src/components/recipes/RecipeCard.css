@@ -10,9 +10,9 @@ img {
 
 .cardlist{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
     flex-direction: row;
-    width: 100%;
+    /* width: 100%; */
 
     
 }
@@ -26,7 +26,8 @@ img {
     padding: 2em 2em;
     margin-bottom: 1em;
     margin-right: 1em;
-    width:32%;
+    width: 33%;
+
     
   }
 .recipe--single {
