@@ -72,34 +72,34 @@ export const EditRecipe = () => {
 
     }
 
-    return (
-        <>
-            <form className="RecipeForm">
-                <h4 className="RecipeForm_name">edit Recipe</h4>
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="recipe">Name for Recipe:</label><br></br>
-                        <input type="text" required autoFocus className="recipe"
-                        onChange={e => {
-                            const copy = {...editRecipe}
-                            copy.name = e.target.value
-                            update(copy)
-                        }
-                    }
-                    value={editRecipe.name}/><br></br>
-                    <label htmlFor="recipeDescription">Directions:</label><br></br>
-                    <input type="text" required autoFocus className="recipeDescription" onChange={e => {
-                        const copy = {...editRecipe}
-                        copy.description = e.target.value
-                        update(copy)
-                    }}
-                    value={editRecipe.description}/>
-                    </div>
-                </fieldset>
-                <button className="btn btn-primary" onClick={submitEditedRecipe}>Save Changes</button>
-            </form>
-            <br></br>
-                    <NewRecipeIngredient currentRecipeId={recipeId}/>
-        </>
-    )
+//     return (
+//         <>
+//             <form className="RecipeForm">
+//                 <h4 className="RecipeForm_name">Edit Recipe</h4>
+//                 <fieldset>
+//                     <div className="form-group">
+//                         <label htmlFor="recipe">Name for Recipe:</label><br></br>
+//                         <input type="text" required autoFocus className="recipe"
+//                         onChange={e => {
+//                             const copy = {...editRecipe}
+//                             copy.name = e.target.value
+//                             update(copy)
+//                         }
+//                     }
+//                     value={editRecipe.name}/><br></br>
+//                     <label htmlFor="recipeDescription">Directions:</label><br></br>
+//                     <input type="text" required autoFocus className="recipeDescription" onChange={e => {
+//                         const copy = {...editRecipe}
+//                         copy.description = e.target.value
+//                         update(copy)
+//                     }}
+//                     value={editRecipe.description}/>
+//                     </div>
+//                 </fieldset>
+//                 <button className="btn btn-primary" onClick={submitEditedRecipe}>Save Changes</button>
+//             </form>
+//             <br></br>
+//                     <NewRecipeIngredient currentRecipeId={recipeId}/>
+//         </>
+//     )
 }

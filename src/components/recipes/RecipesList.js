@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { ToggleButton } from "react-bootstrap"
-// import { Tab, Tabs } from "react-bootstrap"
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap"
 import classnames from "classnames"
 import Settings from "../repositories/Settings"
 import { RecipeCard } from "./RecipeCard"
-// import "./RecipeCard.css"
+
 
 
 //exports list of ALL recipes
@@ -73,30 +72,9 @@ export const RecipeList = (props) => {
             </>
         )
 
-        //(<>
-        //         <Tabs
-        //             id="recipe-page-tabs"
-        //             activeKey={key}
-        //             onSelect={(k) => setKey(k)}
-        //             className="mb-3"
-        //         >
-        //             <Tab eventKey="AllRecipes" title="All Recipes">
-        //                 <ul className="cardList">
-        //                     {recipes.map(
-        //                         (recipe =>
-        //                             <RecipeCard key={`recipe--${recipe.id}`} recipeParam={recipe} />
-        //                         ))}
-        //                 </ul>
-        //             </Tab>
-        //             <Tab eventKey="UserRecipes" title="User Recipes">
-                       
-        //             </Tab>
-
-        // </Tabs>
-        //             </>)
     }
 
-    //iterates through all recipes and runs them through the RecipeCard function
+
     return (
         <>
             {recipeTabs()}
