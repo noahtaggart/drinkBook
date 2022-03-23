@@ -56,8 +56,10 @@ export const NewRecipe = () => {
                         }
                     }
                     placeholder="Recipe name..."/><br></br>
+
+                     {/* {showUploadWidget()}*/}
                     <label htmlFor="recipeDescription">Directions:</label><br></br>
-                    <input type="text" required autoFocus className="recipeDescription" onChange={e => {
+                    <textarea required autoFocus className="recipeDescription" onChange={e => {
                         const copy = {...newRecipe}
                         copy.description = e.target.value
                         update(copy)

@@ -4,7 +4,8 @@ import Settings from "../repositories/Settings"
 import "./RecipeCard.css"
 import image from "./add.png"
 import remove from "./remove.png"
-import { Tabs, Tab } from "react-bootstrap"
+
+
 
 export const RecipeCard = ({ recipeParam }) => {
     //imports all recipe ingredients and filters them by current recipe
@@ -25,6 +26,8 @@ export const RecipeCard = ({ recipeParam }) => {
     const [editableIngredients, setEditIng] = useState(false)
 
     const [addIngredientSwitch, updateIngredientSwitch] = useState(false)
+
+    const [recipeCreator, addCreator] = useState({username:""})
 
 
     //all ingredients
@@ -156,6 +159,14 @@ export const RecipeCard = ({ recipeParam }) => {
         }, [recipeObject]
     )
 
+    useEffect(()=> {
+        
+            fetch(`${Settings.remoteURL}/users`)
+            .then(res=>res.json())
+            .then((data) => addCreator(data.find(user => user.id === recipeObject.userId)))
+
+    },[recipeObject])
+
     //sets all ingredients
     useEffect(() => {
         fetch(`${Settings.remoteURL}/ingredients`)
@@ -230,6 +241,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                     <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
                                     : ""
                                 }
+                                
                                 <div>
                                     {editableIngredients === false ?
                                         <>
@@ -316,6 +328,9 @@ export const RecipeCard = ({ recipeParam }) => {
                             <div className="card-body">
                                 <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
                                 </h3>
+                                {recipeCreator?
+                                <h4>by {recipeCreator.username}</h4>
+                            :""}
                                 {recipeObject.recipePhotos.length >= 1 ?
 
                                     <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
@@ -333,12 +348,15 @@ export const RecipeCard = ({ recipeParam }) => {
                         </li>
             </>
             //renders recipe list if not logged in
-        } else if (localStorage.getItem("drink_token") === undefined) {
-            return <>
+        } else if (localStorage.getItem("drink_token") === null) {
+            return (
+            <>
+            
                 <li className="card">
                     <div className="card-body">
                         <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
                         </h3>
+                        <h4>by {recipeCreator.username}</h4>
                         {recipeObject.recipePhotos.length >= 1 ?
 
                             <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
@@ -355,6 +373,7 @@ export const RecipeCard = ({ recipeParam }) => {
                     </div>
                 </li>
             </>
+            )
 
         }
 

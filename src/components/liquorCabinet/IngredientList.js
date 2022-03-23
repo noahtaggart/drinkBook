@@ -9,7 +9,7 @@ import { IngredientInput } from "./IngredientInput"
 
 
 
-export const IngredientList = (props) => {
+export const IngredientList = () => {
     const [user, setUser] = useState({})
 
 
@@ -33,19 +33,15 @@ export const IngredientList = (props) => {
     //iterates through all ingredients and runs them through the ingredientCard function
     return (
         <>
-        {/* <div className={styles}> */}
-
             <ul className="inventoryList">
                 <li className="card ingredient--list">
                     <IngredientInput user={user} fetchUser={fetchUser} />
                 </li>
-
                 {user?.currentInventory?.map(
                     (ingredient) =>
-                    <IngredientDisplay key={`ingredient--${ingredient.id}`} ingredientParam={ingredient} fetchUser={fetchUser} />
-                    )}
+                        <IngredientDisplay key={`ingredient--${ingredient.id}`} ingredientParam={ingredient} fetchUser={fetchUser} />
+                )}
             </ul>
-                    {/* </div> */}
         </>
     )
 

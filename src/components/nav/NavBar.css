@@ -1,9 +1,10 @@
 .navbar {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important;
     justify-content: space-evenly;
     background-color: #467AB1;
     padding-right:1em;
+    margin-top: 1em;
     
 }
 
@@ -14,5 +15,23 @@
 
 .navbar a {
     color: white;
+    font-size: 20px;
+
 }
+.navbar a:link{
+    text-decoration: none;
+}
+.navbar a:visited{
+    text-decoration: none;
+}
+.navbar a:hover {
+    text-decoration: underline;
+  }
+
+.navbar a:active {
+    text-decoration: underline;
+  }
+
+
+
 

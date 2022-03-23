@@ -9,8 +9,6 @@ img {
 }
 
 .cardlist{
-    display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
 
@@ -26,7 +24,10 @@ img {
     padding: 2em 2em;
     margin-bottom: 1em;
     margin-right: 1em;
-    width:32%
+    max-width: 30%;
+
+    
+
     
   }
 .recipe--single {
@@ -44,9 +45,7 @@ img {
     justify-content: center;
 }
 
-  h3.card-title {
-      margin:0em 0em 1em 0em
-  }
+
 
 
 .add--image, .remove--image {
@@ -72,7 +71,7 @@ button.add--button :hover, button.remove--button :hover, button.add--button :foc
 
 
 textarea {
-    width:98%;
+    width:95%;
     min-height: 6em;
     max-height: auto;
 }

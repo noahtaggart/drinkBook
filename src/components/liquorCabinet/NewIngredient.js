@@ -13,7 +13,7 @@ export const NewIngredient = () => {
 
     //function that posts the new object to the ingredients in the API
     const submitIngredient = (evt) => {
-        evt.preventDefault()
+        
 
 
         if (newIngredient.name && newIngredient.description) {
@@ -34,7 +34,7 @@ export const NewIngredient = () => {
             return fetch(`${Settings.remoteURL}/ingredients`, fetchOption)
                 .then((data) => data.json())
                 .then(() => {
-                    history.push(`newingredients/`)
+                    history.push(`newingredient/`)
                 })
 
         }
@@ -60,7 +60,7 @@ export const NewIngredient = () => {
                                 }
                                 placeholder="Ingredient name..." /><br></br>
                             <label htmlFor="ingredientDescription">Description:</label><br></br>
-                            <input type="text" required autoFocus className="ingredientDescription" onChange={e => {
+                            <textarea required autoFocus className="ingredientDescription" onChange={e => {
                                 const copy = { ...newIngredient }
                                 copy.description = e.target.value
                                 update(copy)

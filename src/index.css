@@ -75,8 +75,15 @@ ul {
   list-style-type: none;
   margin-left: none;
   display: flex;
+  flex-wrap: wrap !important;
+  width: 100%;
 }
 li {
   list-style-type: none;
   margin-left: none;
+  width:30%
+}
+
+form {
+  padding-left: 2em;
 }
