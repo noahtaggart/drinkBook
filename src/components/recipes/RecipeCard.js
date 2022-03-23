@@ -4,6 +4,7 @@ import Settings from "../repositories/Settings"
 import "./RecipeCard.css"
 import image from "./add.png"
 import remove from "./remove.png"
+import { RecipeReview } from "./Review"
 
 
 
@@ -29,6 +30,7 @@ export const RecipeCard = ({ recipeParam }) => {
 
     const [recipeCreator, addCreator] = useState({username:""})
 
+    const [reviewPageOpen, setReviewPage] = useState(false)
 
     //all ingredients
     const [ingredients, setIngredients] = useState([])
@@ -201,6 +203,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                     <br></br>
                                     <div className="directions">{recipeObject.description}</div>
                                 </div>
+                                
                             </div>
 
                         </section>
@@ -221,6 +224,9 @@ export const RecipeCard = ({ recipeParam }) => {
                                     <br></br>
                                     <div className="directions">{recipeObject.description}</div>
                                 </div>
+                                {reviewPageOpen===false? "" :
+                                <RecipeReview setReviewPage={setReviewPage} recipeId={recipeObject.id}/>
+                            }
                             </div>
                         </section>
                     }
