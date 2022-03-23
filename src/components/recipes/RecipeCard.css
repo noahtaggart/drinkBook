@@ -9,10 +9,8 @@ img {
 }
 
 .cardlist{
-    display: flex;
-    flex-wrap: wrap !important;
     flex-direction: row;
-    /* width: 100%; */
+    width: 100%;
 
     
 }
@@ -26,7 +24,9 @@ img {
     padding: 2em 2em;
     margin-bottom: 1em;
     margin-right: 1em;
-    width: 33%;
+    max-width: 30%;
+
+    
 
     
   }
@@ -45,9 +45,7 @@ img {
     justify-content: center;
 }
 
-  h3.card-title {
-      margin:0em 0em 1em 0em
-  }
+
 
 
 .add--image, .remove--image {

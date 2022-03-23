@@ -7,11 +7,14 @@ export const NavBar = (props) => {
 const [currentUser, update] = useState({})
 
 useEffect(() => {
-    fetch(`${Settings.remoteURL}/users/${parseInt(localStorage.getItem("drink_token"))}`)
-    .then(res => res.json())
-    .then((data) => {
-        update(data)
-    })
+    if (localStorage.getItem("drink_token")){
+
+        fetch(`${Settings.remoteURL}/users/${parseInt(localStorage.getItem("drink_token"))}`)
+        .then(res => res.json())
+        .then((data) => {
+            update(data)
+        })
+    }
 },[])
 
 
@@ -42,7 +45,7 @@ useEffect(() => {
                         () => {
                             localStorage.removeItem("drink_token")
                         }
-                    }>Logout</Link>
+                    }>Logout({currentUser.username})</Link>
             </ul>
         )
     } else {

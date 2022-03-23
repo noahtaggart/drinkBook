@@ -28,7 +28,7 @@ export const Drinks = () => {
             />
             <Route exact path="/home">
                 <NavBar/>
-            <RecipeList/>
+                <RecipeList/>
             </Route>
             <Route path="/login">
                 <Login />
