@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     flex-wrap: nowrap !important;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: #467AB1;
     padding-right:1em;
     margin-top: 1em;
