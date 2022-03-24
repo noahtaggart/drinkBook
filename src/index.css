@@ -78,7 +78,7 @@ ul {
   flex-wrap: wrap !important;
   width: 100%;
 }
-li {
+li.card {
   list-style-type: none;
   margin-left: none;
   width:30%
