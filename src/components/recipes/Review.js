@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react"
-import { Link, useHistory, useParams } from "react-router-dom"
+import React, { useState } from "react"
 import Settings from "../repositories/Settings"
 import StarRatingComponent from "react-star-rating-component"
 
-export const RecipeReview = ({recipeId}, {setReviewPage}) => {
+export const RecipeReview = ({recipeId, setReviewPage}) => {
     const [newReview, update] = useState({})
     const [starCountState, setStarCount] = useState({ rating: 0 })
 
     const submitReview = (evt) => {
         evt.preventDefault()
-
-        if (newReview.headline && newReview.body && newReview.rating > 0){
+        debugger
+        if (newReview.headline && newReview.body && starCountState.rating > 0){
 
             const newObject = {
                 headline: newReview.headline,

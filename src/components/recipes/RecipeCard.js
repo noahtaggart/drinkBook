@@ -183,7 +183,7 @@ export const RecipeCard = ({ recipeParam }) => {
         if (recipeId) {
             //triggers if recipe is editable or not
             if (editable === false) {
-
+                //recipe is created by user
                 return <>
                     {parseInt(localStorage.getItem("drink_token")) === recipeObject.userId ?
                         <section className="single--container">
@@ -207,11 +207,11 @@ export const RecipeCard = ({ recipeParam }) => {
                             </div>
 
                         </section>
-                        :
+                        ://recipe not created by user
                         <section className="single--container">
                             <div className="recipe--single">
                                 <div className="card-body">
-                                    <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
+                                    <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
                                     </h3>
                                     {recipeObject.recipePhotos.length >= 1 ?
                                         <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
@@ -224,7 +224,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                     <br></br>
                                     <div className="directions">{recipeObject.description}</div>
                                 </div>
-                                {reviewPageOpen===false? "" :
+                                {reviewPageOpen===false? <button onClick={() => setReviewPage(true)}><a className="a--button">Leave a Review</a></button> :
                                 <RecipeReview setReviewPage={setReviewPage} recipeId={recipeObject.id}/>
                             }
                             </div>
