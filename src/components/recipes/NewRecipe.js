@@ -56,8 +56,6 @@ export const NewRecipe = () => {
                         }
                     }
                     placeholder="Recipe name..."/><br></br>
-
-                     {/* {showUploadWidget()}*/}
                     <label htmlFor="recipeDescription">Directions:</label><br></br>
                     <textarea required autoFocus className="recipeDescription" onChange={e => {
                         const copy = {...newRecipe}
@@ -67,7 +65,7 @@ export const NewRecipe = () => {
                     placeholder="Recipe directions..."/>
                     </div>
                 </fieldset>
-                <button className="btn btn-primary" onClick={submitRecipe}><a className="a--button">Add Recipe</a></button>
+                <button onClick={submitRecipe}><a className="a--button">Add Recipe</a></button>
             </form>
         </>
     )
