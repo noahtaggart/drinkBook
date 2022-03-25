@@ -81,7 +81,8 @@ ul {
 li.card {
   list-style-type: none;
   margin-left: none;
-  width:30%
+  width:30%;
+  min-width: 325px;
 }
 
 form {

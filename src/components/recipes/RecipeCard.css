@@ -15,6 +15,22 @@ img {
     
 }
 
+div.average-box {
+    display: flex;
+    flex-direction: row;
+    justify-content:left;
+    align-items: center;
+    padding-bottom: 2em;
+    padding-left: 1em;
+    flex-wrap: nowrap;
+
+}
+label.dv-star-rating-star.dv-star-rating-full-star, label.dv-star-rating-star.dv-star-rating-empty-star {
+    margin: 0px;
+}
+div.dv-star-rating.dv-star-rating-non-editable {
+    flex-wrap: nowrap;
+}
 
 .card {
     /* Add shadows to create the "card" effect */
@@ -44,6 +60,24 @@ img {
     justify-content: center;
 }
 
+.review-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.review-card {
+    padding-bottom: 2em;
+}
+.review-user {
+    padding-left: 1em;
+}
+.average {
+    padding-right: 1em;
+}
+
+.review-list {
+    padding-left: 1em;
+}
 
 
 

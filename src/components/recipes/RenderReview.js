@@ -23,7 +23,14 @@ export const ShowRecipeReview = ({ reviews }) => {
     return (
         <>
             {recipeRating > 0 ?
-                <div className="average">Average rating: {recipeRating}</div>
+            <>
+            <div className="average-box">
+
+                <div className="average">Average rating:</div> <StarRatingComponent name="rate3"
+                editing={false}
+                value={recipeRating} /> ({recipeRating}/5)
+                </div>
+            </>
                 : ""}
             <ul className="review-list">
 

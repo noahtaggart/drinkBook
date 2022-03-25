@@ -370,7 +370,7 @@ export const RecipeCard = ({ recipeParam }) => {
                         <div className="card-body">
                             <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
                             </h3>
-                            <h4>by {recipeCreator.username}</h4>
+                            <h4>by {recipeCreator?.username}</h4>
                             {recipeObject.recipePhotos.length >= 1 ?
 
                                 <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
