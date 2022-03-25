@@ -1,14 +1,15 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Settings from "../repositories/Settings"
 import StarRatingComponent from "react-star-rating-component"
 
-export const RecipeReview = ({recipeId, setReviewPage}) => {
+export const AddRecipeReview = ({recipeId, setReviewPage}) => {
     const [newReview, update] = useState({})
     const [starCountState, setStarCount] = useState({ rating: 0 })
+    // const [reviews, setReviews] = useState([])
+    // const [refreshReviews, switchReviews] = useState(false)
 
     const submitReview = (evt) => {
         evt.preventDefault()
-        debugger
         if (newReview.headline && newReview.body && starCountState.rating > 0){
 
             const newObject = {
@@ -27,11 +28,14 @@ export const RecipeReview = ({recipeId, setReviewPage}) => {
             }
             return fetch(`${Settings.remoteURL}/ratings`, fetchOption)
             .then(setReviewPage(false))
+            // .then(switchReviews(true))
             
         }
 
 
     }
+
+
 
     const onStarClick = (nextValue) => {
         setStarCount({ rating: nextValue });
@@ -51,7 +55,7 @@ export const RecipeReview = ({recipeId, setReviewPage}) => {
                     />
                 <div className="form-group">
                     <label htmlFor="review-headline">Add a headline</label><br></br>
-                    <textarea required autoFocus className="review-headline"
+                    <textarea required max-length="20" autoFocus className="review-headline"
                         onChange={e => {
                             const copy = { ...newReview }
                             copy.headline = e.target.value
@@ -60,7 +64,7 @@ export const RecipeReview = ({recipeId, setReviewPage}) => {
                         }
                         placeholder="What's most important to know" /><br></br>
                     <label htmlFor="review-body">Add a written review</label><br></br>
-                    <textarea required autoFocus className="review-body"
+                    <textarea required autoFocus max-length="180" className="review-body"
                         onChange={e => {
                             const copy = { ...newReview }
                             copy.body = e.target.value

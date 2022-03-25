@@ -4,7 +4,8 @@ import Settings from "../repositories/Settings"
 import "./RecipeCard.css"
 import image from "./add.png"
 import remove from "./remove.png"
-import { RecipeReview } from "./Review"
+import { AddRecipeReview } from "./AddReview"
+import { ShowRecipeReview } from "./RenderReview"
 
 
 
@@ -28,14 +29,24 @@ export const RecipeCard = ({ recipeParam }) => {
 
     const [addIngredientSwitch, updateIngredientSwitch] = useState(false)
 
-    const [recipeCreator, addCreator] = useState({username:""})
+    const [recipeCreator, addCreator] = useState({ username: "" })
 
     const [reviewPageOpen, setReviewPage] = useState(false)
 
     //all ingredients
     const [ingredients, setIngredients] = useState([])
 
+    const [reviews, setReviews] = useState([{ starRating: 0 }])
+
     const history = useHistory()
+
+
+    useEffect(() => {
+        fetch(`${Settings.remoteURL}/ratings?_expand=user`)
+            .then(res => res.json())
+            .then(data => setReviews(data.filter(review => review.recipeId === recipeObject.id)))
+
+    }, [recipeObject])
 
     //function that posts the edit object to the recipes in the API
     const submitEditedRecipe = (evt) => {
@@ -161,13 +172,13 @@ export const RecipeCard = ({ recipeParam }) => {
         }, [recipeObject]
     )
 
-    useEffect(()=> {
-        
-            fetch(`${Settings.remoteURL}/users`)
-            .then(res=>res.json())
+    useEffect(() => {
+
+        fetch(`${Settings.remoteURL}/users`)
+            .then(res => res.json())
             .then((data) => addCreator(data.find(user => user.id === recipeObject.userId)))
 
-    },[recipeObject])
+    }, [recipeObject])
 
     //sets all ingredients
     useEffect(() => {
@@ -203,7 +214,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                     <br></br>
                                     <div className="directions">{recipeObject.description}</div>
                                 </div>
-                                
+
                             </div>
 
                         </section>
@@ -224,9 +235,11 @@ export const RecipeCard = ({ recipeParam }) => {
                                     <br></br>
                                     <div className="directions">{recipeObject.description}</div>
                                 </div>
-                                {reviewPageOpen===false? <button onClick={() => setReviewPage(true)}><a className="a--button">Leave a Review</a></button> :
-                                <RecipeReview setReviewPage={setReviewPage} recipeId={recipeObject.id}/>
-                            }
+                                {reviews.some(e => e.user?.id === parseInt(localStorage.getItem("drink_token")))? "edit review button" :
+                                    reviewPageOpen === false ? <button onClick={() => setReviewPage(true)}><a className="a--button">Leave a Review</a></button> :
+                                        <AddRecipeReview setReviewPage={setReviewPage} recipeId={recipeObject.id} />
+
+                                }
                             </div>
                         </section>
                     }
@@ -247,7 +260,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                     <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
                                     : ""
                                 }
-                                
+
                                 <div>
                                     {editableIngredients === false ?
                                         <>
@@ -300,11 +313,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                                 </>
                                             }
                                         </>
-
-
                                     }
-
-
                                 </div>
                                 <br></br>
                                 <textarea onChange={e => {
@@ -330,55 +339,48 @@ export const RecipeCard = ({ recipeParam }) => {
     const ListPageRender = () => {
         if (recipeParam && localStorage.getItem("drink_token")) {
             return <>
-                        <li className="card">
-                            <div className="card-body">
-                                <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
-                                </h3>
-                                {recipeCreator?
-                                <h4>by {recipeCreator.username}</h4>
-                            :""}
-                                {recipeObject.recipePhotos.length >= 1 ?
-
-                                    <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
-                                    : ""
-                                }
-
-
-                                {recipeIngredients.map(
-                                    (recipeIngredient) => {
-                                        return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
-                                    })}
-                                <br></br>
-                                <div className="directions">{recipeObject.description}</div>
-                            </div>
-                        </li>
-            </>
-            //renders recipe list if not logged in
-        } else if (localStorage.getItem("drink_token") === null) {
-            return (
-            <>
-            
                 <li className="card">
                     <div className="card-body">
-                        <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
+                        <h3 key={`recipeName--${recipeObject.id}`} className="card-title"><Link to={`/recipes/${recipeObject.id}`}>{recipeObject.name}</Link>
                         </h3>
-                        <h4>by {recipeCreator.username}</h4>
+                        {recipeCreator ?
+                            <h4>by {recipeCreator.username}</h4>
+                            : ""}
                         {recipeObject.recipePhotos.length >= 1 ?
 
                             <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
                             : ""
                         }
-
-
                         {recipeIngredients.map(
                             (recipeIngredient) => {
-                                return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of {recipeIngredient.ingredient.name}</div>
+                                return <div className="ingredient" key={`ingredientAmount--${recipeIngredient.id}`}>{recipeIngredient.ingredientAmount} of <Link to={`/liquorcabinet/${recipeIngredient.ingredient.id}`}>{recipeIngredient.ingredient.name}</Link></div>
                             })}
                         <br></br>
                         <div className="directions">{recipeObject.description}</div>
                     </div>
+                    <ShowRecipeReview reviews={reviews} />
                 </li>
             </>
+            //renders recipe list if not logged in
+        } else if (localStorage.getItem("drink_token") === null) {
+            return (
+                <>
+
+                    <li className="card">
+                        <div className="card-body">
+                            <h3 key={`recipeName--${recipeObject.id}`} className="card-title">{recipeObject.name}
+                            </h3>
+                            <h4>by {recipeCreator?.username}</h4>
+                            {recipeObject.recipePhotos.length >= 1 ?
+
+                                <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
+                                : ""
+                            }
+                            <Link to={`/login`}>Log in to view recipe!</Link>
+                            <ShowRecipeReview reviews={reviews} />
+                        </div>
+                    </li>
+                </>
             )
 
         }

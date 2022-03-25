@@ -1,5 +1,5 @@
 import React from "react"
-import { Route, Redirect } from "react-router-dom"
+import { Route, Redirect, Link } from "react-router-dom"
 import { RecipeList } from "./recipes/RecipesList"
 import "./drinks.css"
 import Login from "./auth/Login"
@@ -16,7 +16,7 @@ export const Drinks = () => {
                     if (localStorage.getItem("drink_token")) {
                         return (
                             <>
-                                <img src={image} alt="drinkbook logo"/>
+                                <Link to={`/recipes`} ><img src={image} alt="drinkbook logo"/></Link>
                                 <NavBar />
                                 <ApplicationViews />
                             </>
