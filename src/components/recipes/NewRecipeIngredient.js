@@ -88,7 +88,7 @@ export const NewRecipeIngredient = ({ currentRecipeId, ingredientRefresh, update
                             placeholder="Ingredient amount, be sure to include units" /><br></br>
                     </div>
                 </fieldset>
-                <button className="btn btn-primary" onClick={submitIngredient}>Add ingredient</button>
+                <button onClick={submitIngredient}>Add ingredient</button>
             </form>
         </>
     )

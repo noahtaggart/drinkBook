@@ -20,16 +20,19 @@ div.average-box {
     flex-direction: row;
     justify-content:left;
     align-items: center;
-    padding-bottom: 2em;
+    padding-bottom: 1em;
     padding-left: 1em;
     flex-wrap: nowrap;
 
+}
+.total-reviews{
+    padding-left: 1em;
 }
 label.dv-star-rating-star.dv-star-rating-full-star, label.dv-star-rating-star.dv-star-rating-empty-star {
     margin: 0px;
 }
 div.dv-star-rating.dv-star-rating-non-editable {
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important;
 }
 
 .card {
@@ -40,6 +43,7 @@ div.dv-star-rating.dv-star-rating-non-editable {
     padding: 2em 2em;
     margin-bottom: 1em;
     margin-right: 1em;
+
 
     
 
@@ -55,6 +59,9 @@ div.dv-star-rating.dv-star-rating-non-editable {
     width: 75%;
 
 }
+
+
+
 .single--container {
     display: flex;
     justify-content: center;
@@ -77,6 +84,17 @@ div.dv-star-rating.dv-star-rating-non-editable {
 
 .review-list {
     padding-left: 1em;
+    flex-direction: column;
+}
+
+.form-group{
+    padding-bottom: 1em;
+}
+#root > ul.inventoryList > li > div {
+    display: flex;
+    justify-content: space-between;
+
+
 }
 
 
