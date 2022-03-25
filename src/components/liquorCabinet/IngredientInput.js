@@ -7,7 +7,7 @@ import Settings from "../repositories/Settings";
 //adds ingredient to users currentInventory
 export const IngredientInput = ({user, fetchUser}) => {
     //creates new ingredient object in state
-    const [newIngredient, update] = useState({})
+    const [newIngredient, update] = useState({ingredientId:0})
 
     //stores all ingredients in state
     const [ingredientList, updateList] = useState([])
@@ -21,14 +21,16 @@ export const IngredientInput = ({user, fetchUser}) => {
             user.currentInventory?.forEach(currentInventory => {queryString +=`id_ne=${currentInventory.ingredientId}&`
         }
             );
+            debugger
                 return fetch(queryString)
                 .then(res => res.json())
                 .then((data) => { updateList(data) })
+                
             
             
             
 
-        },[user]
+        },[user.currentInventory]
     )
 
  
@@ -53,8 +55,11 @@ export const IngredientInput = ({user, fetchUser}) => {
         return fetch(`${Settings.remoteURL}/currentInventory`, fetchOption)
             .then(fetchUser)
             .then(() => {
+                update({ingredientId:0})
                 history.push("/liquorcabinet")
+                
             })
+           
     }
 
     return (
@@ -64,7 +69,7 @@ export const IngredientInput = ({user, fetchUser}) => {
                 <fieldset>
                     <div className="form-group">
                         <label htmlFor="ingredient">Ingredient:</label>
-                        <select className="ingredient" defaultValue={0} onChange={
+                        <select className="ingredient" value={newIngredient.ingredientId}  onChange={
                             (evt) => {
                                 const copy = { ...newIngredient }
                                 copy.ingredientId = parseInt(evt.currentTarget.value)
