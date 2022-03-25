@@ -22,6 +22,7 @@ export const ShowRecipeReview = ({ reviews }) => {
 
     return (
         <>
+                <div className="total-reviews">Total Reviews: {reviews.length}</div>
             {recipeRating > 0 ?
             <>
             <div className="average-box">
