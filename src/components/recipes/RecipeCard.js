@@ -234,8 +234,9 @@ export const RecipeCard = ({ recipeParam }) => {
                                         })}
                                     <br></br>
                                     <div className="directions">{recipeObject.description}</div>
-                                </div>
-                                {reviews.some(e => e.user?.id === parseInt(localStorage.getItem("drink_token")))? "edit review button" :
+                                </div> 
+                                {/* edit review button goes below */}
+                                {reviews.some(e => e.user?.id === parseInt(localStorage.getItem("drink_token")))? "" :
                                     reviewPageOpen === false ? <button onClick={() => setReviewPage(true)}><a className="a--button">Leave a Review</a></button> :
                                         <AddRecipeReview setReviewPage={setReviewPage} recipeId={recipeObject.id} />
 
