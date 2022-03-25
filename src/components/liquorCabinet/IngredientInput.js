@@ -79,7 +79,7 @@ export const IngredientInput = ({user, fetchUser}) => {
                         </select>
                     </div>
                 </fieldset>
-                <button className="btn btn-primary" onClick={submitIngredient}><a className="a--button">Add ingredient</a></button>
+                <button onClick={submitIngredient}><a className="a--button">Add ingredient</a></button>
             </form>
         </>
     )

@@ -308,7 +308,7 @@ export const RecipeCard = ({ recipeParam }) => {
 
                                                         })}
                                                     </select>
-                                                    <button className="btn btn-primary" onClick={() => submitIngredient()}><a className="a--button">Add ingredient</a></button>
+                                                    <button  onClick={() => submitIngredient()}><a className="a--button">Add ingredient</a></button>
                                                     <br></br>
                                                     <button onClick={() => doneEditing()}><a className="a--button">Done Changing Ingredients</a></button>
                                                 </>
@@ -322,7 +322,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                     copy.description = e.target.value
                                     update(copy)
                                 }} className="directions" defaultValue={recipeObject.description} /> <br></br>
-                                <button className="btn btn-primary" onClick={submitEditedRecipe}><a className="a--button">Save Changes</a></button>
+                                <button  onClick={submitEditedRecipe}><a className="a--button">Save Changes</a></button>
                             </div>
                         </div >
                     </section>
@@ -377,6 +377,7 @@ export const RecipeCard = ({ recipeParam }) => {
                                 <img src={recipeObject.recipePhotos[0]?.photoUrl} alt={recipeObject.name} />
                                 : ""
                             }
+                            <br></br>
                             <Link to={`/login`}>Log in to view recipe!</Link>
                             <ShowRecipeReview reviews={reviews} />
                         </div>

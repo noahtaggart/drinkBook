@@ -13,7 +13,7 @@ export const NewIngredient = () => {
 
     //function that posts the new object to the ingredients in the API
     const submitIngredient = (evt) => {
-        
+
 
 
         if (newIngredient.name && newIngredient.description) {
@@ -44,40 +44,37 @@ export const NewIngredient = () => {
 
     return (
         <>
-            <li>
-
-                <form className="IngredientForm">
-                    <h4 className="IngredientForm_name">New Ingredient</h4>
-                    <fieldset>
-                        <div className="form-group">
-                            <label htmlFor="ingredient">Name for Ingredient:</label><br></br>
-                            <input type="text" required autoFocus className="ingredient"
-                                onChange={e => {
-                                    const copy = { ...newIngredient }
-                                    copy.name = e.target.value
-                                    update(copy)
-                                }
-                                }
-                                placeholder="Ingredient name..." /><br></br>
-                            <label htmlFor="ingredientDescription">Description:</label><br></br>
-                            <textarea required autoFocus className="ingredientDescription" onChange={e => {
+            <form className="IngredientForm">
+                <h4 className="IngredientForm_name">New Ingredient</h4>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="ingredient">Name for Ingredient:</label><br></br>
+                        <input type="text" required autoFocus className="ingredient"
+                            onChange={e => {
                                 const copy = { ...newIngredient }
-                                copy.description = e.target.value
+                                copy.name = e.target.value
                                 update(copy)
-                            }}
-                                placeholder="Ingredient description..." /><br></br>
-                            <label htmlFor="ingredientPhoto">Picture URL:</label><br></br>
-                            <input type="text" required autoFocus className="ingredientPhoto" onChange={e => {
-                                const copy = { ...newIngredient }
-                                copy.photoUrl = e.target.value
-                                update(copy)
-                            }}
-                                placeholder="Photo Url..." />
-                        </div>
-                    </fieldset>
-                    <button className="btn btn-primary" onClick={submitIngredient}>Add Ingredient</button>
-                </form>
-            </li>
+                            }
+                            }
+                            placeholder="Ingredient name..." /><br></br>
+                        <label htmlFor="ingredientDescription">Description:</label><br></br>
+                        <textarea required autoFocus className="ingredientDescription" onChange={e => {
+                            const copy = { ...newIngredient }
+                            copy.description = e.target.value
+                            update(copy)
+                        }}
+                            placeholder="Ingredient description..." /><br></br>
+                        <label htmlFor="ingredientPhoto">Picture URL:</label><br></br>
+                        <input type="text" required autoFocus className="ingredientPhoto" onChange={e => {
+                            const copy = { ...newIngredient }
+                            copy.photoUrl = e.target.value
+                            update(copy)
+                        }}
+                            placeholder="Photo Url..." />
+                    </div>
+                </fieldset>
+                <button  onClick={submitIngredient}>Add Ingredient</button>
+            </form>
         </>
     )
 }

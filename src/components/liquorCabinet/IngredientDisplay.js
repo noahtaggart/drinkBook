@@ -77,7 +77,7 @@ export const IngredientDisplay = ({ ingredientParam, fetchUser }) => {
 
             {ingredientParam ?
                 <li className="card ingredient--list">
-                    <div className="card-body">
+                    <div className="ingredient-card-body">
                         <h3 key={`ingredientName--${ingredient.id}`} className="card-title"><Link to={`/liquorcabinet/${ingredient.id}`}>{ingredient.name}</Link></h3>
                         <button className="remove--button" onClick={() => {
                             removeItemInventory(ingredient.id)
@@ -87,7 +87,7 @@ export const IngredientDisplay = ({ ingredientParam, fetchUser }) => {
                 : ""}
             {ingredientId ?
                 <li className="card ingredient--single">
-                    <div className="card-body">
+                    <div className="ingredient-card-body">
                         <h3 key={`ingredientName--${ingredient.id}`} className="card-title"><Link to={`/liquorcabinet/${ingredient.id}`}>{ingredient.name}</Link></h3>
                         <img src={ingredient?.photoUrl} alt={ingredient.name} />
                         <div className="ingredient--description">{ingredient?.description}</div>
