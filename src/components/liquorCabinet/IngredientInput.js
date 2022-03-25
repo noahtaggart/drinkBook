@@ -12,7 +12,18 @@ export const IngredientInput = ({user, fetchUser}) => {
     //stores all ingredients in state
     const [ingredientList, updateList] = useState([])
 
-
+    //function to alphabatize list, made by request from Ian McAllister
+    const codeForIan = ( a,b) => {
+            const nameA = a.name.toUpperCase()
+            const nameB= b.name.toUpperCase()
+            if (nameA < nameB) {
+                return -1
+            }
+            if (nameA> nameB) {
+                return 1
+            }
+            return 0
+    }
 
     //fetches user with embedded inventory
     useEffect(
@@ -21,10 +32,9 @@ export const IngredientInput = ({user, fetchUser}) => {
             user.currentInventory?.forEach(currentInventory => {queryString +=`id_ne=${currentInventory.ingredientId}&`
         }
             );
-            debugger
                 return fetch(queryString)
                 .then(res => res.json())
-                .then((data) => { updateList(data) })
+                .then((data) => updateList(data.sort(codeForIan)))
                 
             
             
