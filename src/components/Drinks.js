@@ -19,6 +19,7 @@ export const Drinks = () => {
                                 <Link to={`/recipes`} ><img src={image} alt="drinkbook logo"/></Link>
                                 <NavBar />
                                 <ApplicationViews />
+                                <Redirect to="/recipes"/>
                             </>
                         );
                     } else {
