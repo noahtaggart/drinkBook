@@ -15,14 +15,30 @@ export const ShowRecipeReview = ({ reviews }) => {
 
             for (const review of reviews) {
                 sum += review.starRating
-                const averageRating = sum / reviews.length
-                const copy = {...recipeRating}
-                copy.value = averageRating
+                const averageRating = (sum / reviews.length)
+                if (averageRating % 1 === 0) {
+                    const roundedAverage = averageRating
+                    const copy = {...recipeRating}
+                copy.value = roundedAverage
                 copy.edit = false
                 copy.isHalf = true
                 copy.activeColor = "#FCB401"
                 copy.size=24
                 setRating(copy)
+
+                } else {
+                    const roundedAverage = Math.round(averageRating *10) / 10
+                    const fixedAverage = parseFloat(roundedAverage.toFixed(1))
+                    const copy = {...recipeRating}
+                copy.value = fixedAverage
+                copy.edit = false
+                copy.isHalf = true
+                copy.activeColor = "#FCB401"
+                copy.size=24
+                setRating(copy)
+            
+                }
+                
             }
         }
     }, [reviews])
