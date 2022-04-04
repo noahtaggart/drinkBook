@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import StarRatingComponent from "react-star-rating-component"
+import ReactStars from "react-rating-stars-component"
 
 export const ShowRecipeReview = ({ reviews }) => {
     
-    const [recipeRating, setRating] = useState(0)
+    const [recipeRating, setRating] = useState({})
 
 
 
@@ -15,7 +16,13 @@ export const ShowRecipeReview = ({ reviews }) => {
             for (const review of reviews) {
                 sum += review.starRating
                 const averageRating = sum / reviews.length
-                setRating(averageRating)
+                const copy = {...recipeRating}
+                copy.value = averageRating
+                copy.edit = false
+                copy.isHalf = true
+                copy.activeColor = "#FCB401"
+                copy.size=24
+                setRating(copy)
             }
         }
     }, [reviews])
@@ -23,13 +30,11 @@ export const ShowRecipeReview = ({ reviews }) => {
     return (
         <>
                 <div className="total-reviews">Total Reviews: {reviews.length}</div>
-            {recipeRating > 0 ?
+            {recipeRating.value > 0 ?
             <>
             <div className="average-box">
 
-                <div className="average">Average rating:</div> <StarRatingComponent name="rate3"
-                editing={false}
-                value={recipeRating} /> ({recipeRating}/5)
+                <div className="average">Average rating:</div> <ReactStars {...recipeRating} /> ({recipeRating.value}/5)
                 </div>
             </>
                 : ""}
