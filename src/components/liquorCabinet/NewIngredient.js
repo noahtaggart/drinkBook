@@ -73,7 +73,7 @@ export const NewIngredient = () => {
                             placeholder="Photo Url..." />
                     </div>
                 </fieldset>
-                <button  onClick={submitIngredient}>Add Ingredient</button>
+                <button  onClick={submitIngredient}><a className="a--button">Add Ingredient</a></button>
             </form>
         </>
     )
