@@ -51,9 +51,13 @@ export const IngredientDisplay = ({ ingredientParam, fetchUser }) => {
             .then(res => res.json())
             .then((data) => {
                 const matchedUser = data.filter(item => item.userId === parseInt(localStorage.getItem("drink_token")))
+
+                
                 update(matchedUser)
             })
     }, [ingredientParam])
+
+    
 
 
     const removeItemInventory = (ingredientId) => {
