@@ -16,7 +16,7 @@ export const Drinks = () => {
                     if (localStorage.getItem("drink_token")) {
                         return (
                             <>
-                                <Link to={`/recipes`} ><img src={image} alt="drinkbook logo"/></Link>
+                                <Link to={`/recipes`} ><img src={image} alt="drinkbook logo" /></Link>
                                 <NavBar />
                                 <ApplicationViews />
                             </>
@@ -27,8 +27,9 @@ export const Drinks = () => {
                 }}
             />
             <Route exact path="/home">
-                <NavBar/>
-                <RecipeList/>
+                <img src={image} alt="drinkbook logo" />
+                <NavBar />
+                <RecipeList />
             </Route>
             <Route path="/login">
                 <Login />

@@ -51,8 +51,10 @@ useEffect(() => {
     } else {
         return (
             <>
+                <div className="login">
 
                 <Link className="navbar__link" to="/login">Login</Link>
+                </div>
 
             </>
 
