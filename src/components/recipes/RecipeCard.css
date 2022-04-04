@@ -23,10 +23,14 @@ div.average-box {
     padding-bottom: 1em;
     padding-left: 1em;
     flex-wrap: nowrap;
+    font-size: 1.25em;
 
 }
+
+
 .total-reviews{
     padding-left: 1em;
+    font-size: 1.25em;
 }
 label.dv-star-rating-star.dv-star-rating-full-star, label.dv-star-rating-star.dv-star-rating-empty-star {
     margin: 0px;

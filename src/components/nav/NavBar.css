@@ -45,6 +45,8 @@ a.navbar__link {
 .login {
     float: right;
     padding-right: 10px;
+    font-size: 1.5em;
+    padding-top: 10px;
 }
 
 
