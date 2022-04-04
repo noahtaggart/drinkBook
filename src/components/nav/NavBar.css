@@ -40,8 +40,11 @@
 
 a.navbar__link {
     border-bottom: 1em;
+}
 
-
+.login {
+    float: right;
+    padding-right: 10px;
 }
 
 
